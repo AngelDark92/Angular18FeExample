@@ -2,7 +2,7 @@ import { Group } from "./group.model";
 
 export interface User {
     id ? : any;
-     username ?: string;
+    username ?: string;
     password ? : string;
     email ? : string;
     group ? : Group;    

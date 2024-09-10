@@ -7,6 +7,7 @@
   <mat-card>
     <mat-card-title>Login</mat-card-title>
     <form [formGroup]="userForm" (ngSubmit)="submit()">
+      
       <mat-form-field appearance="fill" class="login-field">
         <mat-label>Username</mat-label>
         <input matInput formControlName="email" required />
@@ -28,7 +29,7 @@
           Login
         </button>
         <button mat-raised-button color="accent" class="register-button" (click)="register()">
-          Register
+          Registrazione
         </button>
       </div>
     </form>

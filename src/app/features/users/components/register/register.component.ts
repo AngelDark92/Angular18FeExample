@@ -13,6 +13,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
 import { Group } from '../../../../core/models/group.model';
+import { User } from '../../../../core/models/user.model';
+import { UtentePaziente } from '../../../../core/models/utente-paziente.model';
+import { Paziente } from '../../../../core/models/paziente.model';
 
 
 @Component({
@@ -29,9 +32,9 @@ import { Group } from '../../../../core/models/group.model';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent {
   registerForm: FormGroup;
-  groups : Group[] = [];
+  
 
   private baseUrl = "http://localhost:8080";
 
@@ -41,10 +44,15 @@ export class RegisterComponent implements OnInit{
       username: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
       password: ["", [Validators.required, Validators.minLength(5)]],
-      group: [null, [Validators.required]]
+      group: [{ value: 1, disabled: true }, Validators.required],
+      nome: ["", [Validators.required]],
+      cognome: ["", [Validators.required]],
+      codiceFiscale: ["", [Validators.required, Validators.maxLength(16)]],
+      comuneDiResidenza: ["", [Validators.required]],
+      numeroDiTelefono: ["", [Validators.required]],
     });
   }
-  ngOnInit(): void {
+  /*ngOnInit(): void {
     // Carica i gruppi al caricamento del componente
     this.loadGroups();
   }
@@ -59,13 +67,31 @@ export class RegisterComponent implements OnInit{
         console.error('Errore durante il recupero dei gruppi:', error);
       }
     });
-  }
+  }*/
+ 
 
   register() {
     if (this.registerForm.valid) {
       // Se il modulo è valido, i valori dei campi email e password vengono estratti dall'oggetto userForm.value. Questi valori verranno utilizzati per la richiesta di login.
-      const { username, email, password, group } = this.registerForm.value;
-      this.userService.createUser({ username, email, password, group }).subscribe({
+      const { username, email, password, group, nome, cognome, codiceFiscale,comuneDiResidenza, numeroDiTelefono } = this.registerForm.value;
+      // Crea un oggetto User
+      const newUser: User = {
+        username,
+        email,
+        password,
+        group
+  
+      };
+      const newPaziente: Paziente = {
+        nome,
+        cognome,
+        codiceFiscale,
+        comuneDiResidenza,
+        numeroDiTelefono,
+        user:newUser
+      };
+
+      this.userService.createUserPaziente({ user: newUser, paziente: newPaziente }).subscribe({
         next: (response) => {
           console.log('Registrazione avvenuta con successo', response);
         },

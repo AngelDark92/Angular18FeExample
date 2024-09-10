@@ -43,8 +43,14 @@ mat-card {
 button {
   width: 48%;
 }
+.mat-mdc-raised-button.mat-accent {
+  --mdc-protected-button-container-color: #342b97;
+  --mdc-protected-button-label-text-color: white;
+  --mat-protected-button-state-layer-color: white;
+  --mat-protected-button-ripple-color: rgba(195, 195, 195, 0.862);
+}
 
 .register-button {
-  background-color: gray;
+  background-color: rgb(21, 66, 131);
   color: white;
 }

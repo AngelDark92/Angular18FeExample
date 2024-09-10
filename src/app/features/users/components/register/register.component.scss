@@ -23,11 +23,14 @@ mat-card {
 button {
   width: 48%;
 }
-
-.login-button {
-  background-color: gray;
-  color: white;
+.mat-mdc-raised-button.mat-accent {
+  --mdc-protected-button-container-color: #342b97;
+  --mdc-protected-button-label-text-color: white;
+  --mat-protected-button-state-layer-color: white;
+  --mat-protected-button-ripple-color: rgba(195, 195, 195, 0.862);
 }
+
+
 /* Container for the image and the card to ensure they are aligned side by side */
 .content-wrapper {
   display: flex;

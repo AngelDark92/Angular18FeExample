@@ -35,8 +35,54 @@
           Password is required
         </mat-error>
       </mat-form-field>
-      
-      
+
+      <mat-form-field appearance="fill" class="register-field">
+        <mat-label>Group</mat-label>
+        <input matInput formControlName="group" type="number" />
+        <mat-error *ngIf="registerForm.get('group')?.hasError('required')">
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="register-field">
+        <mat-label>Nome</mat-label>
+        <input matInput type="text" formControlName="nome" required />
+        <mat-error *ngIf="registerForm.get('nome')?.hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="register-field">
+        <mat-label>Cognome</mat-label>
+        <input matInput type="text" formControlName="cognome" required />
+        <mat-error *ngIf="registerForm.get('cognome')?.hasError('required')">
+          Cognome is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="register-field">
+        <mat-label>Codice Fiscale</mat-label>
+        <input matInput type="text" formControlName="codiceFiscale" required />
+        <mat-error *ngIf="registerForm.get('codiceFiscale')?.hasError('required')">
+          codice Fiscale is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="register-field">
+        <mat-label>Comune di Residenza</mat-label>
+        <input matInput type="text" formControlName="comuneDiResidenza" required />
+        <mat-error *ngIf="registerForm.get('comuneDiResidenza')?.hasError('required')">
+          Comune di Residenza is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="register-field">
+        <mat-label>Numero di telefono</mat-label>
+        <input matInput type="text" formControlName="numeroDiTelefono" required />
+        <mat-error *ngIf="registerForm.get('numeroDiTelefono')?.hasError('required')">
+          Numero di telefono is required
+        </mat-error>
+      </mat-form-field>
+
 
       <div class="button-group">
         <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
