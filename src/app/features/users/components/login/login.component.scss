@@ -1,0 +1,50 @@
+/* Center the entire container on the page */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container for the image and the card to ensure they are aligned side by side */
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 400px;
+}
+
+.image-container {
+  height: 100%;
+}
+
+.image-container img {
+  width: 400px;
+  /* Same width as the card */
+  height: 100%;
+  object-fit: cover;
+}
+
+mat-card {
+  width: 400px;
+  padding: 2em;
+}
+
+.login-field {
+  display: block;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  width: 48%;
+}
+
+.register-button {
+  background-color: gray;
+  color: white;
+}
