@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
+import { Group } from '../../../../core/models/group.model';
 
 
 @Component({
@@ -28,13 +29,10 @@ import { MatOptionModule } from '@angular/material/core';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit{
   registerForm: FormGroup;
-  groups = [
-    { id: 1, name: 'Group 1' },
-    { id: 2, name: 'Group 2' },
-    { id: 3, name: 'Group 3' },
-  ];
+  groups : Group[] = [];
+
   private baseUrl = "http://localhost:8080";
 
 
@@ -46,22 +44,22 @@ export class RegisterComponent {
       group: [null, [Validators.required]]
     });
   }
-  // ngOnInit(): void {
-  //   // Carica i gruppi al caricamento del componente
-  //   this.loadGroups();
-  // }
+  ngOnInit(): void {
+    // Carica i gruppi al caricamento del componente
+    this.loadGroups();
+  }
 
-  // // Metodo per caricare i gruppi dal servizio
-  // loadGroups() {
-  //   this.groupService.getGroup().subscribe({
-  //     next: (response) => {
-  //       this.groups = response;  // Popola l'array dei gruppi
-  //     },
-  //     error: (error) => {
-  //       console.error('Errore durante il recupero dei gruppi:', error);
-  //     }
-  //   });
-  // }
+  // Metodo per caricare i gruppi dal servizio
+  loadGroups() {
+    this.groupService.getGroup().subscribe({
+      next: (response) => {
+        this.groups = response;  // Popola l'array dei gruppi
+      },
+      error: (error) => {
+        console.error('Errore durante il recupero dei gruppi:', error);
+      }
+    });
+  }
 
   register() {
     if (this.registerForm.valid) {
