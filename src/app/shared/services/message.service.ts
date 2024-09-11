@@ -12,7 +12,7 @@ export class MessageService {
 
   getMessage(): string {
     const msg = this.message;
-    this.message = '';  // Clear the message after retrieval
+    this.message = '';  // cancella il messaggio dopo il recupero, dopo 8 secondi
     return msg;
   }
 }

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../core/services/user.service';
-
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
-
-import { GroupService } from '../../../../shared/services/group.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -12,9 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatOptionModule } from '@angular/material/core';
-
 import { User } from '../../../../core/models/user.model';
-
 import { Paziente } from '../../../../core/models/paziente.model';
 import { MessageService } from '../../../../shared/services/message.service';
 
@@ -49,7 +44,7 @@ export class RegisterComponent {
       cognome: ["", [Validators.required]],
       codiceFiscale: ["", [Validators.required, Validators.maxLength(16)]],
       comuneDiResidenza: ["", [Validators.required]],
-      numeroDiTelefono: ["", [Validators.required]],
+      numeroDiTelefono: ["", [Validators.required, Validators.maxLength(10)]],
     });
   }
 
@@ -73,15 +68,17 @@ export class RegisterComponent {
         numeroDiTelefono,
         user:newUser
       };
-
+// NOTA: le variabili dei parametri che passo al metodo devono essere uguali alle variabili sate nel cotroller di spring e nei models di angular.
+//vedi-> userDTO e pasienteDTO usato sia nel modello utente-pazienre che nello userController come parametro passato nel requestbody
       this.userService.createUserPaziente({ userDTO: newUser, pazienteDTO: newPaziente }).subscribe({
         next: (response) => {
           console.log('Registrazione avvenuta con successo', response);
-          this.messageService.setMessage('Registrazione avvenuta con successo. Puoi effettuare il log in');
+          this.messageService.setMessage('Registrazione avvenuta con successo. Puoi effettuare il login.');
           this.router.navigate(["/login"]);
         },
         error: (errorResponse) => {
           console.error('Errore durante la registrazione', errorResponse);
+          
         }
       });
     } else {

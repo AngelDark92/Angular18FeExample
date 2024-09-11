@@ -7,10 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-field';
+import {  MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MessageService } from '../../../../shared/services/message.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
@@ -37,13 +35,18 @@ export class LoginComponent {
   private baseUrl = "http://localhost:8080";
   errore: string = "";
   successMessage: string = "";
-  private _snackBar = inject(MatSnackBar);
+  private _snackBar = inject(MatSnackBar);//utilizza l'API inject() per l'iniezione dei servizi, in questo caso per l'iniezione del servizio MatSnackBar di Angular Material.
+  /*
+  inject() è un metodo fornito da Angular che consente di ottenere un'istanza di un servizio direttamente all'interno di una classe, funzione o componente senza dover usare il costruttore per l'iniezione delle dipendenze.
+Questa API rende più concisa l'iniezione dei servizi, eliminando la necessità di aggiungere il servizio nei parametri del costruttore.
+  */
+  
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
 
 
-
+// al costruttore si passano i servizi (anche Router e HttpClient sono servizi)
   constructor(private userService: UserService, private http: HttpClient, private router: Router, private messageService: MessageService) {
 
   }
@@ -61,11 +64,16 @@ export class LoginComponent {
         Qui, viene effettuato un log della risposta e si naviga alla pagina /home utilizzando il router di Angular.*/
         next: (response) => {
           console.log('Login successful:', response);  // Handle successful response
-          this.userService.storeUserData(response);
-          this.router.navigate(["/home"]);
+          this.userService.storeUserData(response); // Gestisce la risosta di successo
+          this.router.navigate(["/home"]); // è un metodo di Angular utilizzato per navigare programmaticamente tra le diverse rotte dell'applicazione. In questo caso, esegue il reindirizzamento dell'utente alla rotta /home.
+        /*
+        Il metodo navigate() è usato per effettuare la navigazione programmatica verso una nuova rotta.
+  Accetta un array di stringhe che rappresenta il percorso della rotta alla quale si desidera accedere. 
+  In questo caso, ["/home"] rappresenta la rotta /home.
+        */  
         },
         error: (errorResponse) => {
-          console.error('Login failed:', errorResponse);  // Handle errors
+          console.error('Login failed:',errorResponse);  // Gestisce la risposta d'errore
           this.errore = errorResponse;
         }
       });
@@ -82,12 +90,10 @@ export class LoginComponent {
     this.router.navigate(['/register']);
   }
 
-  // quando inizializzi una classe fa qualcosa perchè il costruttore non può fare cose complesse, chiamare servizi e caricare dati del backend
+  // quando inizializzi una classe fa qualcosa perchè il costruttore non può fare cose complesse, chiamare servizi e caricare e recuperare dati del backend (dai servizi)
   ngOnInit(): void {
     this.successMessage = this.messageService.getMessage();
-
     if (this.successMessage) {
-      
       this._snackBar.open(this.successMessage, "", {duration: 8000, horizontalPosition: this.horizontalPosition,
         verticalPosition: this.verticalPosition,});
     }
