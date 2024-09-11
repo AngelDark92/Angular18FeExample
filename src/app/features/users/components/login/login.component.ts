@@ -61,25 +61,21 @@ export class LoginComponent {
         Qui, viene effettuato un log della risposta e si naviga alla pagina /home utilizzando il router di Angular.*/
         next: (response) => {
           console.log('Login successful:', response);  // Handle successful response
-        this.router.navigate(["/home"]);
+          this.userService.storeUserData(response);
+          this.router.navigate(["/home"]);
         },
         error: (errorResponse) => {
-          console.error('Login failed:',errorResponse);  // Handle errors
+          console.error('Login failed:', errorResponse);  // Handle errors
           this.errore = errorResponse;
         }
       });
     }
-    else{
+    else {
       //Se il modulo non è valido, viene impostata la variabile errore su true,
       //il che potrebbe far scattare una logica di visualizzazione di un messaggio di errore o altre azioni correttive.
       this.errore = "Email non valida o password troppo corta";
 
     }
-  }
-  login (email: string, password: string): Observable<User>{
-    const loginData = {email,password};
-    return this.http.post(this.baseUrl+"/user/login", loginData)
-
   }
 
   register(): void { 

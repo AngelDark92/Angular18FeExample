@@ -1,0 +1,27 @@
+<div class="layout-container">
+  <!-- Header -->
+  <mat-toolbar color="primary" class="header">
+    <span>Hospital Management System</span>
+  </mat-toolbar>
+
+  <!-- Horizontal Menu -->
+  <nav class="horizontal-menu">
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/home">Home</button>
+      <button mat-menu-item routerLink="/patients">Patients</button>
+      <button mat-menu-item routerLink="/appointments">Appointments</button>
+      <button mat-menu-item routerLink="/doctors">Doctors</button>
+    </mat-menu>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="content">
+    <router-outlet/> <!-- Loads the selected component -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>Hospital Management System &copy; 2024</p>
+  </footer>
+</div>
