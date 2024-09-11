@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../../core/services/user.service';
 import { Observable } from 'rxjs';
@@ -12,6 +12,8 @@ import { MatFormFieldControl, MatFormFieldModule } from '@angular/material/form-
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MessageService } from '../../../../shared/services/message.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 
 
@@ -34,10 +36,15 @@ export class LoginComponent {
   userForm = new FormGroup({ email: new FormControl("", [Validators.required, Validators.email]), password: new FormControl("", [Validators.required, Validators.minLength(5)]) })
   private baseUrl = "http://localhost:8080";
   errore: string = "";
+  successMessage: string = "";
+  private _snackBar = inject(MatSnackBar);
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
 
 
-  constructor(private userService: UserService, private http: HttpClient, private router: Router) {
+
+  constructor(private userService: UserService, private http: HttpClient, private router: Router, private messageService: MessageService) {
 
   }
 
@@ -75,7 +82,18 @@ export class LoginComponent {
 
   }
 
-  register(): void {
+  register(): void { 
     this.router.navigate(['/register']);
+  }
+
+  // quando inizializzi una classe fa qualcosa perchè il costruttore non può fare cose complesse, chiamare servizi e caricare dati del backend
+  ngOnInit(): void {
+    this.successMessage = this.messageService.getMessage();
+
+    if (this.successMessage) {
+      
+      this._snackBar.open(this.successMessage, "", {duration: 8000, horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition,});
+    }
   }
 }
