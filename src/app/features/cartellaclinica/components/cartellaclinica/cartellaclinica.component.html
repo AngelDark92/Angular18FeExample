@@ -1,0 +1,32 @@
+<table mat-table [dataSource]="dati" class="mat-elevation-z8">  <!-- dataSource della tabella = il nome che ho usato nel ts -->
+  
+    <!-- Colonna Reparto -->
+    <ng-container matColumnDef="reparto">
+      <th mat-header-cell *matHeaderCellDef> Reparto </th>
+      <td mat-cell *matCellDef="let element"> {{element.reparto}} </td>
+    </ng-container>
+  
+    <!-- Colonna Diagnosi -->
+    <ng-container matColumnDef="diagnosi">
+      <th mat-header-cell *matHeaderCellDef> Diagnosi </th>
+      <td mat-cell *matCellDef="let element"> {{element.diagnosi}} </td>
+    </ng-container>
+  
+    <!-- Colonna Terapia -->
+    <ng-container matColumnDef="terapia">
+      <th mat-header-cell *matHeaderCellDef> Terapia </th>
+      <td mat-cell *matCellDef="let element"> {{element.terapia}} </td>
+    </ng-container>
+  
+    <!-- Colonna Cartella Clinica -->
+    <ng-container *ngIf = "userData?.pazienteDTO" matColumnDef="cartellaClinica">
+      <th mat-header-cell *matHeaderCellDef> Nome medico</th>
+      <td mat-cell *matCellDef="let element"> {{element.cartellaClinica?.medico?.nome}} </td>
+    </ng-container>
+  
+    <!-- Header e righe -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+  </table>
+  

@@ -5,6 +5,7 @@ import { PaginaNonEsistenteComponent } from './shared/components/pagina-non-esis
 import { HomeComponent } from './features/home/components/home/home.component';
 import { RegisterComponent } from './features/users/components/register/register.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
+import { CartellaclinicaComponent } from './features/cartellaclinica/components/cartellaclinica/cartellaclinica.component';
 
 
 export const routes: Routes = [
@@ -16,6 +17,8 @@ export const routes: Routes = [
     //
     children: [
       { path: 'home', component: HomeComponent },
+      { path: 'cartellaclinica', component: CartellaclinicaComponent }
+
       // Altri componenti qui
     ],
   },

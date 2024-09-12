@@ -2,23 +2,32 @@
   <!-- Header -->
   <mat-toolbar color="primary" class="header">
     <span>Hospital Management System</span>
+
+
+    <!-- <span *ngIf="userData?.medicoDTO">
+      Benvenuto, {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}.
+    </span> -->
+
+
   </mat-toolbar>
 
   <!-- Horizontal Menu -->
-  <nav class="horizontal-menu">
-    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item routerLink="/home">Home</button>
-      <button mat-menu-item routerLink="/patients">Patients</button>
-      <button mat-menu-item routerLink="/appointments">Appointments</button>
-      <button mat-menu-item routerLink="/doctors">Doctors</button>
-    </mat-menu>
-  </nav>
+  <mat-tab-group (selectedTabChange)="onTabChange($event)">
+    <mat-tab *ngIf= "userData" label="Home"   >   </mat-tab>
+    <mat-tab *ngIf= "userData?.pazienteDTO" label="Cartella clinica" > </mat-tab>
+    <mat-tab *ngIf= "userData?.medicoDTO || userData?.userDTO?.id==4" label="Lista Pazienti"> </mat-tab>
+    <mat-tab *ngIf= "userData?.medicoDTO" label="Cartelle cliniche"> </mat-tab>
+    <mat-tab *ngIf= "userData?.userDTO?.id==4" label= "Lista medici"> </mat-tab>
+  </mat-tab-group>
+
+
+  
 
   <!-- Main Content -->
   <main class="content">
-    <router-outlet/> <!-- Loads the selected component -->
+    <router-outlet /> <!-- Loads the selected component -->
   </main>
+
 
   <!-- Footer -->
   <footer class="footer">

@@ -1,31 +1,37 @@
 .layout-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh; /* Occupare almeno tutta l'altezza della finestra */
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding: 0 1em;
   color: white;
 }
 
-.horizontal-menu {
-  background-color: #004d40;
-  padding: 0.5em;
-  display: flex;
+
+.span {
   justify-content: center;
 }
 
 .content {
-  flex-grow: 1;
+  flex-grow: 1; /* La parte principale della pagina si espande */
   padding: 2em;
 }
 
 .footer {
-  background-color: #00796b;
+  background-color: #6996e4;
   color: white;
   text-align: center;
   padding: 1em;
+  margin-top: auto; /* Spinge il footer in basso */
+  width: 100%; /* Occupa l'intera larghezza */
+  position: relative; /* Rimuove spazio aggiuntivo */
+  bottom: 0; /* Assicura che sia sempre sul fondo */
 }
+
+/* Container for the image and the card to ensure they are aligned side by side */
+
+

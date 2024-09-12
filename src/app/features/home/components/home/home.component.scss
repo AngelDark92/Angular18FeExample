@@ -3,3 +3,32 @@ p {
   text-align: center;
   margin-top: 2em;
 }
+
+.image-container {
+  display: flex;
+  justify-content: flex-start; /* Allinea l'immagine verso sinistra */
+  align-items: center; /* Centra verticalmente */
+  height: 20%;
+  padding-inline-start: 15%;
+  padding-top: 7%;
+}
+
+.image-container span{
+  font-size: 18px;  /* dimensione*/
+  /*font-style: italic; /* Corsivo */
+  font-weight: bold;  /* Grassetto */
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.image-container img {
+  padding-left: 10%;
+  display: flex;
+  justify-content: flex-start;
+  width: 200px;
+  height: auto; /* Mantieni l'aspect ratio dell'immagine */
+  object-fit: cover;
+}
+
+
