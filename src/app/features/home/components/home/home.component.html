@@ -1,11 +1,16 @@
 <!-- Image Container -->
-<div class="image-container">
-    <img src="assets/foto.jpg" alt="Login Image" />
+<mat-card class="transparent-card">
+    <div class="image-container">
+        <img src="assets/foto.jpg" alt="Login Image" />
 
-    <span *ngIf="userData?.pazienteDTO">
-      Benvenuto, &nbsp; {{ userData?.pazienteDTO?.nome }} {{ userData?.pazienteDTO?.cognome }} <br> <br>Info:
-      <br> <br>Codice Fiscale: {{ userData?.pazienteDTO?.codiceFiscale }}.
-    </span>
-
-  </div>
-
+        <span *ngIf="userData?.pazienteDTO">
+            Benvenuto, &nbsp; {{ userData?.pazienteDTO?.nome }} {{ userData?.pazienteDTO?.cognome }} <br> <br>Info:
+            <br> <br>Codice Fiscale: {{ userData?.pazienteDTO?.codiceFiscale }}.
+        </span>
+        <span *ngIf="userData?.medicoDTO">
+            Benvenuto, &nbsp; {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }} 
+        </span>
+        
+    </div>
+       
+</mat-card>

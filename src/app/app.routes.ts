@@ -6,6 +6,9 @@ import { HomeComponent } from './features/home/components/home/home.component';
 import { RegisterComponent } from './features/users/components/register/register.component';
 import { LayoutComponent } from './shared/components/layout/layout.component';
 import { CartellaclinicaComponent } from './features/cartellaclinica/components/cartellaclinica/cartellaclinica.component';
+import { VisualizzaImmagineComponent } from './features/cartellaclinica/components/visualizza-immagine/visualizza-immagine.component';
+import { ListaCartelleComponent } from './features/cartellaclinica/components/lista-cartelle/lista-cartelle.component';
+
 
 
 export const routes: Routes = [
@@ -17,11 +20,22 @@ export const routes: Routes = [
     //
     children: [
       { path: 'home', component: HomeComponent },
-      { path: 'cartellaclinica', component: CartellaclinicaComponent }
+      { path: 'cartella-clinica', component: CartellaclinicaComponent},
+      { path: 'cartelle-cliniche', component: ListaCartelleComponent},
+      { path: 'immagine/:id', component: VisualizzaImmagineComponent},
+      { path: 'cartellaclinica/:id', component: CartellaclinicaComponent},
+
+      
+         
+        ]
+      },
+      
+    
+    
+      
 
       // Altri componenti qui
-    ],
-  },
+    
   { path: '**',  component: PaginaNonEsistenteComponent},  // Wildcard route for handling undefined routes
 
 

@@ -8,9 +8,8 @@ p {
   display: flex;
   justify-content: flex-start; /* Allinea l'immagine verso sinistra */
   align-items: center; /* Centra verticalmente */
-  height: 20%;
-  padding-inline-start: 15%;
-  padding-top: 7%;
+  
+ 
 }
 
 .image-container span{
@@ -30,5 +29,20 @@ p {
   height: auto; /* Mantieni l'aspect ratio dell'immagine */
   object-fit: cover;
 }
+mat-card {
+  width: 800px;
+  padding: 1em;
+  margin-left: 300px;
+  margin-top: 100px;
+ 
+}
+.transparent-card {
+  background-color: rgba(255, 255, 255, 0.5); /* Trasparente */
+  /* Rimuove l'ombra */
+  border-color: rgb(35, 119, 184);
+  
+}
+
+
 
 

@@ -65,7 +65,7 @@ Questa API rende più concisa l'iniezione dei servizi, eliminando la necessità 
         next: (response) => {
           console.log('Login successful:', response);  // Handle successful response
           this.userService.storeUtentiData(response); // Gestisce la risosta di successo
-          this.messageService.setMessage('Login avvenuta con successo.');
+          this.messageService.setMessage('Login avvenuto con successo.');
           this.router.navigate(["/home"]); // è un metodo di Angular utilizzato per navigare programmaticamente tra le diverse rotte dell'applicazione. In questo caso, esegue il reindirizzamento dell'utente alla rotta /home.
         /*
         Il metodo navigate() è usato per effettuare la navigazione programmatica verso una nuova rotta.

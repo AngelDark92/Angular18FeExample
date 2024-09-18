@@ -4,5 +4,5 @@ export interface Medico {
      id ?: any
       nome ?: string;
       cognome ?: string;
-      user ?: User;
+      userDTO ?: User;
 }

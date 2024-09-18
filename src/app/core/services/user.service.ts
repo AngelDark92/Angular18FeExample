@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../models/user.model';
-import { Paziente } from '../models/paziente.model';
+
 import { Utenti } from '../models/utenti.model';
 
 
@@ -23,13 +22,13 @@ export class UserService {
 
   }
 
-  createUtenti(userPaziente: Utenti): Observable<Utenti>{
-    return this.http.post(this.baseUrl+"/user/crea-user-paziente", userPaziente);
+  createUtenti(utenti: Utenti): Observable<Utenti>{
+    return this.http.post(this.baseUrl+"/user/crea-user-paziente", utenti);
   }
 
   // Metti la userData nel local storage durante il login
-  storeUtentiData(pazienteData: Utenti): void {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(pazienteData));
+  storeUtentiData(utentiData: Utenti): void {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(utentiData));
   }
 
   // Riceve la user data dal local storage per poter essere usata, la user data é di tipo User

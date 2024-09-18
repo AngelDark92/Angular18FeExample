@@ -66,10 +66,10 @@ export class RegisterComponent {
         email,
         comuneDiResidenza,
         numeroDiTelefono,
-        user:newUser
+        userDTO:newUser
       };
-// NOTA: le variabili dei parametri che passo al metodo devono essere uguali alle variabili sate nel cotroller di spring e nei models di angular.
-//vedi-> userDTO e pasienteDTO usato sia nel modello utente-pazienre che nello userController come parametro passato nel requestbody
+// NOTA: le variabili dei parametri che passo al metodo devono essere uguali alle variabili usate nel cotroller di spring e nei models di angular.
+//vedi-> userDTO e pasienteDTO usato sia nel modello utenti che nello userController come parametro passato nel requestbody
       this.userService.createUtenti({ userDTO: newUser, pazienteDTO: newPaziente }).subscribe({
         next: (response) => {
           console.log('Registrazione avvenuta con successo', response);

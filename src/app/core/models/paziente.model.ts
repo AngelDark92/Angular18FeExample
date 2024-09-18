@@ -8,5 +8,5 @@ export interface Paziente {
     email?:string;
     comuneDiResidenza?:string;
     numeroDiTelefono?:string;
-    user?:User;
+    userDTO?:User;
 }

@@ -5,5 +5,5 @@ export interface User {
     username ?: string;
     password ? : string;
     email ? : string;
-    group ? : Group;    
+    groupDTO ? : Group;    
 }

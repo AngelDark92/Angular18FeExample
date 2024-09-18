@@ -19,6 +19,7 @@
 .content {
   flex-grow: 1; /* La parte principale della pagina si espande */
   padding: 2em;
+  
 }
 
 .footer {
@@ -30,6 +31,10 @@
   width: 100%; /* Occupa l'intera larghezza */
   position: relative; /* Rimuove spazio aggiuntivo */
   bottom: 0; /* Assicura che sia sempre sul fondo */
+}
+.mat-tab-link.active {
+  font-weight: bold;
+  color: blue;
 }
 
 /* Container for the image and the card to ensure they are aligned side by side */

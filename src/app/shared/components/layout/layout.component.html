@@ -12,21 +12,20 @@
   </mat-toolbar>
 
   <!-- Horizontal Menu -->
-  <mat-tab-group (selectedTabChange)="onTabChange($event)">
-    <mat-tab *ngIf= "userData" label="Home"   >   </mat-tab>
-    <mat-tab *ngIf= "userData?.pazienteDTO" label="Cartella clinica" > </mat-tab>
-    <mat-tab *ngIf= "userData?.medicoDTO || userData?.userDTO?.id==4" label="Lista Pazienti"> </mat-tab>
-    <mat-tab *ngIf= "userData?.medicoDTO" label="Cartelle cliniche"> </mat-tab>
-    <mat-tab *ngIf= "userData?.userDTO?.id==4" label= "Lista medici"> </mat-tab>
-  </mat-tab-group>
+  <nav mat-tab-nav-bar [tabPanel] = "lista">
+    <a
+    mat-tab-link
+    *ngFor="let link of links"
+    [routerLink]="link.path"
+    [active]="activeLink === link.path"
+    (click)="activeLink = link.path">
+    {{ link.label }}
+  </a>
+  </nav>
 
-
-  
-
-  <!-- Main Content -->
-  <main class="content">
-    <router-outlet /> <!-- Loads the selected component -->
-  </main>
+  <mat-tab-nav-panel #lista>
+    <router-outlet></router-outlet> <!-- This will display your routed content -->
+  </mat-tab-nav-panel>
 
 
   <!-- Footer -->

@@ -6,5 +6,5 @@ export interface Immagine {
     file?: string;
     dataInserimento?: string;
     tipo?: string;
-    dato?: Dato;
+    idDato?: any;
 }

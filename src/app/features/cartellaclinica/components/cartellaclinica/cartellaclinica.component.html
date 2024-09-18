@@ -1,32 +1,64 @@
-<table mat-table [dataSource]="dati" class="mat-elevation-z8">  <!-- dataSource della tabella = il nome che ho usato nel ts -->
-  
+<mat-toolbar color="primary" class="header">
+    <span>
+        {{ userData?.pazienteDTO?.nome }} {{ userData?.pazienteDTO?.cognome }}, ecco la tua cartella clinica:
+
+    </span>
+</mat-toolbar>
+
+<!-- La tabella con i dati -->
+<table mat-table [dataSource]="dati" class="mat-elevation-z8">
     <!-- Colonna Reparto -->
     <ng-container matColumnDef="reparto">
-      <th mat-header-cell *matHeaderCellDef> Reparto </th>
-      <td mat-cell *matCellDef="let element"> {{element.reparto}} </td>
+        <th mat-header-cell *matHeaderCellDef> Reparto </th>
+        <td mat-cell *matCellDef="let dato"> {{dato.reparto}} </td>
     </ng-container>
-  
+
     <!-- Colonna Diagnosi -->
     <ng-container matColumnDef="diagnosi">
-      <th mat-header-cell *matHeaderCellDef> Diagnosi </th>
-      <td mat-cell *matCellDef="let element"> {{element.diagnosi}} </td>
+        <th mat-header-cell *matHeaderCellDef> Diagnosi </th>
+        <td mat-cell *matCellDef="let dato"> {{dato.diagnosi}} </td>
     </ng-container>
-  
+
     <!-- Colonna Terapia -->
     <ng-container matColumnDef="terapia">
-      <th mat-header-cell *matHeaderCellDef> Terapia </th>
-      <td mat-cell *matCellDef="let element"> {{element.terapia}} </td>
+        <th mat-header-cell *matHeaderCellDef> Terapia </th>
+        <td mat-cell *matCellDef="let dato"> {{dato.terapia}} </td>
     </ng-container>
-  
+
     <!-- Colonna Cartella Clinica -->
-    <ng-container *ngIf = "userData?.pazienteDTO" matColumnDef="cartellaClinica">
-      <th mat-header-cell *matHeaderCellDef> Nome medico</th>
-      <td mat-cell *matCellDef="let element"> {{element.cartellaClinica?.medico?.nome}} </td>
+    <ng-container matColumnDef="cartellaClinica">
+        <th mat-header-cell *matHeaderCellDef> Nome medico </th>
+        <td mat-cell *matCellDef="let dato"> {{dato.cartellaClinicaDTO?.medicoDTO?.nome}} </td>
     </ng-container>
-  
+
+    <ng-container matColumnDef="immagine">
+        <th mat-header-cell *matHeaderCellDef> Immagine </th>
+        <td mat-cell *matCellDef="let dato">
+            <!-- Spostiamo il pulsante sotto il form field -->
+            <mat-form-field>
+                <mat-label>Immagini</mat-label>
+                <mat-select [(value)]="immagineId">
+                    <!--value metto il valore che voglio prendermi dal select e che voglio passare -->
+                    <mat-option *ngFor="let immagine of dato.immagini"
+                        [value]="immagine.id">{{immagine.nome}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="visualizza">
+        <th mat-header-cell *matHeaderCellDef> Azioni </th>
+        <td mat-cell *matCellDef="let dato">
+            <div style="display: flex; gap: 10px;">
+                <button mat-raised-button color="primary" *ngIf="dato.immagini"
+                    (click)="visualizza()" class="material-icons pageview" >Visualizza</button>
+
+                <button mat-raised-button color="primary" *ngIf="dato.immagini" (click)="elimina()" class="material-icons delete"> Elimina</button>
+            </div>
+        </td>
+    </ng-container>
+
     <!-- Header e righe -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-  </table>
-  
+</table>

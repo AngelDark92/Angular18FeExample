@@ -1,0 +1,58 @@
+
+  
+  
+
+  .bar{
+    display: flex;
+    
+     
+  }
+  
+  
+  .span {
+    justify-content: center;
+  }
+  
+  .content {
+    flex-grow: 1; /* La parte principale della pagina si espande */
+    padding: 2em;
+  }
+  
+  
+  
+
+  
+  
+  .span {
+    justify-content: center;
+  }
+  
+
+.content {
+  flex-grow: 1; /* La parte principale della pagina si espande */
+  padding: 5em;
+}
+
+
+.span {
+    justify-content: start;
+  }
+
+   .mat-form-field{
+    background-color:white;
+  }
+
+  .mat-toolbar.mat-primary {
+    --mat-toolbar-container-background-color: #99a6ed;
+    --mat-toolbar-container-text-color: white;
+}
+
+
+
+
+
+
+  
+  
+  
+  

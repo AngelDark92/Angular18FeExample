@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+  }
+  
+  
+  .header {
+    display: flex;
+    padding: 0 1em;
+    color: white;
+    align-content: flex-start
+  }
+  .span {
+    justify-content: start;
+  }
+
+  .custom-select .mat-form-field{
+    background-color:white;
+  }
+  .mat-toolbar{
+    height: 10%;
+  }
+
+  .mat-toolbar.mat-primary {
+    --mat-toolbar-container-background-color: #99a6ed;
+    --mat-toolbar-container-text-color: white;
+}
+
+
+
+
+
+
+
+
+
+  
+  
+ 

@@ -1,0 +1,59 @@
+<mat-toolbar color="primary" class="header">
+    <span>
+        {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}, ecco la lista delle tue cartelle cliniche:
+
+    </span>
+</mat-toolbar>
+
+<table mat-table [dataSource]="cartelle" class="mat-elevation-z8">
+    <!-- Colonna Reparto -->
+    <ng-container matColumnDef="nomePaziente">
+        <th mat-header-cell *matHeaderCellDef> Nome Paziente </th>
+        <td mat-cell *matCellDef="let cartella"> {{cartella.pazienteDTO?.nome}} </td>
+    </ng-container>
+
+    <!-- Colonna Diagnosi -->
+    <ng-container matColumnDef="cognomePaziente">
+        <th mat-header-cell *matHeaderCellDef> Cognome paziente </th>
+        <td mat-cell *matCellDef="let cartella"> {{cartella.pazienteDTO?.cognome}} </td>
+    </ng-container>
+
+    <!-- Colonna Terapia -->
+    <ng-container matColumnDef="codiceFiscale">
+        <th mat-header-cell *matHeaderCellDef> Codice Fiscale </th>
+        <td mat-cell *matCellDef="let cartella"> {{cartella.pazienteDTO?.codiceFiscale}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="dato">
+        <th mat-header-cell *matHeaderCellDef> Dato </th>
+        <td mat-cell *matCellDef="let cartella">
+            <!-- Spostiamo il pulsante sotto il form field -->
+            <mat-form-field>
+                <mat-label>Dato</mat-label>
+                <mat-select [(value)]="datoId">
+                    <!--value metto il valore che voglio prendermi dal select e che voglio passare -->
+                    <mat-option *ngFor="let dato of cartella.dati"
+                        [value]="dato.id">{{dato.diagnosi}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="visualizza">
+        <th mat-header-cell *matHeaderCellDef> Azioni </th>
+        <td mat-cell *matCellDef="let cartella">
+            <div style="display: flex; gap: 10px;">
+                <button mat-raised-button color="primary" *ngIf="cartella.dati"
+                    (click)="visualizza()">Visualizza</button>
+
+                <button mat-raised-button color="primary" *ngIf="cartella.dati" >Elimina</button>
+            </div>
+        </td>
+    </ng-container>
+
+    <!-- Header e righe -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
