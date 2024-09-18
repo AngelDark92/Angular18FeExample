@@ -46,9 +46,14 @@
         <td mat-cell *matCellDef="let cartella">
             <div style="display: flex; gap: 10px;">
                 <button mat-raised-button color="primary" *ngIf="cartella.dati"
-                    (click)="visualizza()">Visualizza</button>
+                    (click)="visualizza()">Visualizza Dato</button>
+
+                    <button mat-raised-button color="primary" 
+                    (click)="visualizzaDatiCartella(cartella.pazienteDTO?.id)">Visualizza Dati Cartella</button>
 
                 <button mat-raised-button color="primary" *ngIf="cartella.dati" >Elimina</button>
+
+
             </div>
         </td>
     </ng-container>

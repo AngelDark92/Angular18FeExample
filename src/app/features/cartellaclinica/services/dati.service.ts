@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Utenti } from '../../../core/models/utenti.model';
 import { Cartellaclinica } from '../../../core/models/cartellaclinica.model';
 import { Dato } from '../../../core/models/dato.model';
+import { ListaDati } from '../../../core/models/lista-dati.model';
 
 
 
@@ -17,9 +18,9 @@ export class DatiService {
 
   constructor(private http: HttpClient) {}
 
-  getDatiByPazienteId(pazienteId: any): Observable<Dato[]> {
+  getDatiByPazienteId(pazienteId: any): Observable<ListaDati> {
     const params = new HttpParams().set('pazienteId', pazienteId);
-    return this.http.get<Dato[]>(`${this.baseUrl}/dato/get-dati`, { params });
+    return this.http.get(`${this.baseUrl}/dato/get-dati`, { params });
   }
 
   getListaCartelle(utenti : Utenti) : Observable<Cartellaclinica[]>{
@@ -27,9 +28,9 @@ export class DatiService {
     return this.http.post<Cartellaclinica[]>(this.baseUrl+"/cartella/post-lista-cartelle", utenti);
   }
 
-  getDati(datoId: any): Observable<Dato[]> {
+  getDato(datoId: any): Observable<Dato> {
     const params = new HttpParams().set('datoId', datoId);
-    return this.http.get<Dato[]>(`${this.baseUrl}/dato/get-dati-by-id`, { params });
+    return this.http.get(`${this.baseUrl}/dato/get-dati-by-id`, { params });
   }
 
 

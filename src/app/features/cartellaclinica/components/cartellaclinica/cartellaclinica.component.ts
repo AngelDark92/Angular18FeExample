@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cartellaclinica } from '../../../../core/models/cartellaclinica.model';
+import { ListaDati } from '../../../../core/models/lista-dati.model';
 
 
 
@@ -24,13 +25,15 @@ import { Cartellaclinica } from '../../../../core/models/cartellaclinica.model';
   styleUrls: ['./cartellaclinica.component.scss']
 })
 export class CartellaclinicaComponent implements OnInit {
-  dati: Dato[] = [];
+  dati: ListaDati | null = null;
+  immagineId: any;
   id: any;
   idMedico: any;
   userData: Utenti | null = null;
-  immagineId: any;
   cartellaId: any;
-  datoId: any;
+  pazienteId: any;
+  
+  
 
   // Definisci le colonne che vuoi visualizzare nella tabella perchè uso mat tab
   displayedColumns: string[] = ['reparto', 'diagnosi', 'terapia', 'cartellaClinica', 'immagine', "visualizza"];
@@ -43,8 +46,8 @@ export class CartellaclinicaComponent implements OnInit {
     this.userData = this.userService.getUtentiData();
     this.idMedico = this.userData?.medicoDTO?.id;
     this.id = this.userData?.pazienteDTO?.id;
-    this.datoId = this.route.snapshot.paramMap.get("id"); // prende il parametro di quello che ha chiamato il componente
-    if (this.id) {
+    this.pazienteId = this.route.snapshot.paramMap.get("id"); // prende il parametro di quello che ha chiamato il componente
+    if (this.id) { // id del paziente che ha fatto il login(localstorage)
       this.datiService.getDatiByPazienteId(this.id).subscribe({
         next: (response) => {
           console.log('Dati ricevuti', response);
@@ -56,8 +59,8 @@ export class CartellaclinicaComponent implements OnInit {
         }
       });
     } 
-    else if(this.datoId){
-      this.datiService.getDati(this.datoId).subscribe({
+    else if(this.pazienteId){ //id del paziente relativo alla cartella selezionata
+      this.datiService.getDatiByPazienteId(this.pazienteId).subscribe({
         next: (response) => {
           console.log('Dati ricevuti', response);
           this.dati = response;
@@ -80,7 +83,7 @@ export class CartellaclinicaComponent implements OnInit {
   }
 
   elimina() : void{
-    this.router.navigate(['/cartellacinica', this.cartellaId])
+    this.router.navigate(['/cartella-clinica', this.cartellaId])
   }
 
 }

@@ -53,7 +53,7 @@ export class LayoutComponent implements OnInit {
       this.links = [
         { path: '/home', label: 'Home' },
         { path: '/cartella-clinica', label: 'Cartella Clinica' },
-        { path: '/logout', label: 'Logout' }
+       
       ]
 
     }
@@ -61,11 +61,14 @@ export class LayoutComponent implements OnInit {
       this.links = [
         { path: '/home', label: 'Home' },
         { path: '/cartelle-cliniche', label: 'Cartelle Cliniche' },
-        { path: '/logout', label: 'Logout' }
+       
  
       ];
     }
   }
-  // Define the links for routing
+  logout(): void { 
+    this.userService.logout();
+    this.router.navigate(['/login']);
+  }
   
 }

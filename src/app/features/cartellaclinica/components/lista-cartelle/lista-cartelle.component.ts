@@ -47,11 +47,15 @@ export class ListaCartelleComponent implements OnInit {
     }
 
   }
+ 
+
   visualizza(): void { 
-    this.router.navigate(['/cartellaclinica', this.datoId]);
+    this.router.navigate(['/dato', this.datoId]);
   }
 
-
+  visualizzaDatiCartella(pazienteId: string): void { 
+    this.router.navigate(['/cartella-clinica', pazienteId]);
+  }
 
 
 }

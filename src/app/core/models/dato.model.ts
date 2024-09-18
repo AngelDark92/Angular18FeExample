@@ -6,6 +6,5 @@ export interface Dato {
     reparto?: string;
     diagnosi?: string;
     terapia?: string;
-    cartellaClinicaDTO?: Cartellaclinica;
     immagini ?: Immagine[];
 }

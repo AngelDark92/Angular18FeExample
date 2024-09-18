@@ -9,6 +9,16 @@
   justify-content: space-evenly;
   padding: 0 1em;
   color: white;
+  height: auto;
+  
+}
+
+.mat-mdc-tab-header {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  margin-bottom: 50px;
 }
 
 
@@ -36,7 +46,14 @@
   font-weight: bold;
   color: blue;
 }
-
-/* Container for the image and the card to ensure they are aligned side by side */
+.header mat-card {
+  width: auto;
+    max-width: 300px;
+    background-color: rgb(63 139 181);
+    box-shadow: none;
+    max-height: 200px;
+    margin-right: -400px;
+}
+    
 
 
