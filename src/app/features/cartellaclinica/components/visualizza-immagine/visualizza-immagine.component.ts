@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { ImmagineResponse } from '../../../../core/models/immagine-response.model';
 
 @Component({
   selector: 'app-visualizza-immagine',
@@ -26,9 +27,9 @@ import { MatTableModule } from '@angular/material/table';
     CommonModule,
     MatCardModule,
     MatTableModule,
-    MatFormFieldModule, 
-    MatSelectModule, 
-    MatInputModule, 
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
     FormsModule],
   templateUrl: './visualizza-immagine.component.html',
   styleUrl: './visualizza-immagine.component.scss'
@@ -36,7 +37,7 @@ import { MatTableModule } from '@angular/material/table';
 export class VisualizzaImmagineComponent {
   userData: Utenti | null = null;
   idImmagine: any;
-  immagini: Immagine[] = [];
+  immagini!: ImmagineResponse;
 
   displayedColumns: string[] = ['nome', 'file', 'dataInserimento', 'tipo'];
 
@@ -61,6 +62,6 @@ export class VisualizzaImmagineComponent {
     this.router.navigate([`/${route}`]);
 
   }
-    
+
 
   }
