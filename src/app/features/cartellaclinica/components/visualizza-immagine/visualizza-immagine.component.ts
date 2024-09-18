@@ -45,7 +45,7 @@ export class VisualizzaImmagineComponent {
   ngOnInit(): void {
     this.userData = this.userService.getUtentiData();
     this.idImmagine = this.route.snapshot.paramMap.get("id");
-    this.immaginiService.getImmagini(this.idImmagine).subscribe({
+    this.immaginiService.getImmagine(this.idImmagine).subscribe({
       next: (response) => {
         console.log('Dati immagine ricevuti', response);
         this.immagini = response;

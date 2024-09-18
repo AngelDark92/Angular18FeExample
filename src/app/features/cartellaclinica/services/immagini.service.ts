@@ -10,8 +10,8 @@ export class ImmaginiService {
 
   constructor(private http: HttpClient) { }
 
-  getImmagini(immagineId: any): Observable<any> {
+  getImmagine(immagineId: any): Observable<any> {
     const params = new HttpParams().set('immagineId', immagineId);
-    return this.http.get(`${this.baseUrl}/immagine/get-immagini`, { params });
+    return this.http.get(`${this.baseUrl}/immagine/get-immagine`, { params });
   }
 }
