@@ -8,6 +8,7 @@ import { LayoutComponent } from './shared/components/layout/layout.component';
 import { CartellaclinicaComponent } from './features/cartellaclinica/components/cartellaclinica/cartellaclinica.component';
 import { VisualizzaImmagineComponent } from './features/cartellaclinica/components/visualizza-immagine/visualizza-immagine.component';
 import { ListaCartelleComponent } from './features/cartellaclinica/components/lista-cartelle/lista-cartelle.component';
+import { DatoComponent } from './features/cartellaclinica/components/dato/dato.component';
 
 
 
@@ -23,12 +24,14 @@ export const routes: Routes = [
       { path: 'cartella-clinica', component: CartellaclinicaComponent},
       { path: 'cartelle-cliniche', component: ListaCartelleComponent},
       { path: 'immagine/:id', component: VisualizzaImmagineComponent},
-      { path: 'cartellaclinica/:id', component: CartellaclinicaComponent},
+      { path: 'cartella-clinica/:id', component: CartellaclinicaComponent},
+      { path: 'dato/:id', component: DatoComponent},
 
       
          
         ]
       },
+      
       
     
     
