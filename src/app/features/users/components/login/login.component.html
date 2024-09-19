@@ -4,35 +4,41 @@
       <!-- Image for the left side of the card -->
       <img src="assets/foto.jpg" alt="Login Image" />
     </div>
-  <mat-card>
-    <mat-card-title>Login</mat-card-title>
-    <form [formGroup]="userForm" (ngSubmit)="submit()">
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+      <form [formGroup]="userForm" (ngSubmit)="submit()">
+
+        <mat-form-field appearance="fill" class="login-field">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="email" required />
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="login-field">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required />
+          <mat-error *ngIf="userForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+
+        <div class="button-group">
+          <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
+            Login
+          </button>
+          <button mat-raised-button color="accent" class="register-button" (click)="register()">
+            Registrazione
+          </button>
+        </div>
+       
+        <!-- Messaggio di errore per login fallito -->
+        <div *ngIf="loginError" class="error-message">
+          Username o password errati. Riprova.
+        </div>
       
-      <mat-form-field appearance="fill" class="login-field">
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="email" required />
-        <mat-error *ngIf="userForm.get('email')?.hasError('required')">
-          Email is required
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" class="login-field">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" required />
-        <mat-error *ngIf="userForm.get('password')?.hasError('required')">
-          Password is required
-        </mat-error>
-      </mat-form-field>
-
-      <div class="button-group">
-        <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">
-          Login
-        </button>
-        <button mat-raised-button color="accent" class="register-button" (click)="register()">
-          Registrazione
-        </button>
-      </div>
-    </form>
-  </mat-card>
+      </form>
+    </mat-card>
   </div>
 </div>

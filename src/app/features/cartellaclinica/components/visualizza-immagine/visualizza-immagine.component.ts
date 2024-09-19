@@ -6,27 +6,29 @@ import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { Utenti } from '../../../../core/models/utenti.model';
 import { UserService } from '../../../../core/services/user.service';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
 import { ImmagineResponse } from '../../../../core/models/immagine-response.model';
+import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
+import { DatiService } from '../../services/dati.service';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-visualizza-immagine',
   standalone: true,
-  imports: [MatToolbarModule,
+  imports: [
     MatButtonModule,
+    MatGridListModule, 
+    MatDividerModule,
     MatMenuModule,
     RouterModule,
     CommonModule,
     MatCardModule,
-    MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
@@ -37,11 +39,13 @@ import { ImmagineResponse } from '../../../../core/models/immagine-response.mode
 export class VisualizzaImmagineComponent {
   userData: Utenti | null = null;
   idImmagine: any;
-  immagini!: ImmagineResponse;
+  immagine!: ImmagineResponse; //!: inizializzerò questa variabile successivamente.
+  selectedImageData!: SafeUrl;
+  selectedImageNome: string = "";
 
-  displayedColumns: string[] = ['nome', 'file', 'dataInserimento', 'tipo'];
 
-  constructor(private route: ActivatedRoute, private userService: UserService, private immaginiService: ImmaginiService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private userService: UserService, private immaginiService: ImmaginiService, private router: Router,
+    private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.userData = this.userService.getUtentiData();
@@ -49,7 +53,10 @@ export class VisualizzaImmagineComponent {
     this.immaginiService.getImmagine(this.idImmagine).subscribe({
       next: (response) => {
         console.log('Dati immagine ricevuti', response);
-        this.immagini = response;
+        const objectURL = `data:${response.type};base64,${response.base64Date}`;
+        this.selectedImageData = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+        this.selectedImageNome = response.nomeFile || 'Unknown'; 
+        this.immagine = response;
       },
       error: (errorResponse) => {
         console.error('Errore durante il recupero dei dati della immagine', errorResponse);
@@ -62,6 +69,5 @@ export class VisualizzaImmagineComponent {
     this.router.navigate([`/${route}`]);
 
   }
-
-
+  
   }

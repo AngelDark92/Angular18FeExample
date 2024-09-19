@@ -6,5 +6,5 @@ export interface Cartellaclinica {
     id? : any;
     pazienteDTO?: Paziente;
     medicoDTO?: Medico;
-    datiSenzaCartella ?: Dato[];
+    dati ?: Dato[];
 }

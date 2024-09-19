@@ -32,31 +32,37 @@
     </ng-container>
 
     <ng-container matColumnDef="immagine">
-        <th mat-header-cell *matHeaderCellDef> Immagine </th>
-        <td mat-cell *matCellDef="let dato">
-            <!-- Spostiamo il pulsante sotto il form field -->
-            <mat-form-field>
-                <mat-label>Immagini</mat-label>
-                <mat-select [(value)]="immagineId">
-                    <!--value metto il valore che voglio prendermi dal select e che voglio passare -->
-                    <mat-option *ngFor="let immagine of dato.immagini"
-                        [value]="immagine.id">{{immagine.nome}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </td>
-    </ng-container>
+    <th mat-header-cell *matHeaderCellDef> Immagine </th>
+    <td mat-cell *matCellDef="let dato">
+        <mat-form-field>
+            <mat-label>Immagini</mat-label>
+            <mat-select [(value)]="dato.immagine.id">
+                <!-- value prende il valore che voglio passare e selezionare -->
+                <mat-option *ngFor="let immagine of dato.immagini" [value]="immagine.id">
+                    {{immagine.nome}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </td>
+</ng-container>
 
-    <ng-container matColumnDef="visualizza">
-        <th mat-header-cell *matHeaderCellDef> Azioni </th>
-        <td mat-cell *matCellDef="let dato">
-            <div style="display: flex; gap: 10px;">
-                <button mat-raised-button color="primary" *ngIf="dato.immagini"
-                    (click)="visualizza()" class="material-icons pageview" >Visualizza</button>
+<ng-container matColumnDef="visualizza">
+    <th mat-header-cell *matHeaderCellDef> Azioni </th>
+    <td mat-cell *matCellDef="let dato">
+        <div style="display: flex; gap: 10px;">
+            <!-- Abilita/disabilita in base al valore di dato.immagineId -->
+            <button mat-raised-button color="primary" 
+                (click)="visualizza(dato.immagine.id)" 
+                class="material-icons pageview"
+                [disabled]="!dato.immagine.id">Visualizza</button>
 
-                <button mat-raised-button color="primary" *ngIf="dato.immagini" (click)="elimina()" class="material-icons delete"> Elimina</button>
-            </div>
-        </td>
-    </ng-container>
+            <button mat-raised-button color="primary" 
+                (click)="elimina(dato.immagine.id)" 
+                class="material-icons delete"> Elimina</button>
+        </div>
+    </td>
+</ng-container>
+
 
     <!-- Header e righe -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

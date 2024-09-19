@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Dato } from '../../../../core/models/dato.model';
 import { DatiService } from '../../services/dati.service';
 import { UserService } from '../../../../core/services/user.service';
 import { MatTableModule } from '@angular/material/table';
@@ -12,15 +11,16 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Cartellaclinica } from '../../../../core/models/cartellaclinica.model';
 import { ListaDati } from '../../../../core/models/lista-dati.model';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 @Component({
   selector: 'app-cartellaclinica',
   standalone: true,
-  imports: [MatTableModule,MatToolbarModule,MatFormFieldModule, MatSelectModule, MatInputModule, FormsModule, CommonModule, MatButtonModule],
+  imports: [MatTableModule, MatToolbarModule, MatFormFieldModule, MatSelectModule,
+    MatInputModule, MatIconModule, FormsModule, CommonModule, MatButtonModule],
   templateUrl: './cartellaclinica.component.html',
   styleUrls: ['./cartellaclinica.component.scss']
 })
@@ -32,8 +32,8 @@ export class CartellaclinicaComponent implements OnInit {
   userData: Utenti | null = null;
   cartellaId: any;
   pazienteId: any;
-  
-  
+
+
 
   // Definisci le colonne che vuoi visualizzare nella tabella perchè uso mat tab
   displayedColumns: string[] = ['reparto', 'diagnosi', 'terapia', 'cartellaClinica', 'immagine', "visualizza"];
@@ -58,8 +58,8 @@ export class CartellaclinicaComponent implements OnInit {
 
         }
       });
-    } 
-    else if(this.pazienteId){ //id del paziente relativo alla cartella selezionata
+    }
+    else if (this.pazienteId) { //id del paziente relativo alla cartella selezionata
       this.datiService.getDatiByPazienteId(this.pazienteId).subscribe({
         next: (response) => {
           console.log('Dati ricevuti', response);
@@ -72,18 +72,18 @@ export class CartellaclinicaComponent implements OnInit {
       });
 
     }
-    
+
     else {
       console.warn('ID paziente non trovato');
     }
   }
 
-  visualizza(): void { 
-    this.router.navigate(['/immagine', this.immagineId]);
+  visualizza(immagineId: any): void {
+    this.router.navigate(['/immagine', immagineId]);
   }
 
-  elimina() : void{
-    this.router.navigate(['/cartella-clinica', this.cartellaId])
+  elimina(immagineId: any): void {
+    this.router.navigate(['/cartella-clinica', this.immagineId])
   }
 
 }

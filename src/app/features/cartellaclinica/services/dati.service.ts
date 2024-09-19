@@ -33,6 +33,15 @@ export class DatiService {
     return this.http.get(`${this.baseUrl}/dato/get-dati-by-id`, { params });
   }
 
+  eliminaCartella(medicoId: any, cartellaId: any): Observable<any> {
+    const params = new HttpParams()
+    .set('medicoId', medicoId)
+    .set('cartellaId', cartellaId); 
+    return this.http.delete(`${this.baseUrl}/cartella/elimina-cartella-by-id`, { params, responseType: 'text' });
+  }
+  
+  
+
 
 
   

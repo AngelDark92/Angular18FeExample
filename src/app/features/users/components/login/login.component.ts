@@ -36,6 +36,7 @@ export class LoginComponent {
   errore: string = "";
   successMessage: string = "";
   private _snackBar = inject(MatSnackBar);//utilizza l'API inject() per l'iniezione dei servizi, in questo caso per l'iniezione del servizio MatSnackBar di Angular Material.
+  loginError: boolean = false; // Variabile per il messaggio di errore
   /*
   inject() è un metodo fornito da Angular che consente di ottenere un'istanza di un servizio direttamente all'interno di una classe, funzione o componente senza dover usare il costruttore per l'iniezione delle dipendenze.
 Questa API rende più concisa l'iniezione dei servizi, eliminando la necessità di aggiungere il servizio nei parametri del costruttore.
@@ -63,11 +64,16 @@ Questa API rende più concisa l'iniezione dei servizi, eliminando la necessità 
         Se la richiesta di login ha successo, il metodo next viene chiamato con la risposta dal server.
         Qui, viene effettuato un log della risposta e si naviga alla pagina /home utilizzando il router di Angular.*/
         next: (response) => {
+          if(response){
           console.log('Login successful:', response);  // Handle successful response
           this.userService.storeUtentiData(response); // Gestisce la risosta di successo
           this.messageService.setMessage('Login avvenuto con successo.');
           this.router.navigate(["/home"]); // è un metodo di Angular utilizzato per navigare programmaticamente tra le diverse rotte dell'applicazione. In questo caso, esegue il reindirizzamento dell'utente alla rotta /home.
-        /*
+          this.loginError = false; //login avvenuto con successp
+          } else{
+            this.loginError=true; //credenziali errate
+          }
+          /*
         Il metodo navigate() è usato per effettuare la navigazione programmatica verso una nuova rotta.
   Accetta un array di stringhe che rappresenta il percorso della rotta alla quale si desidera accedere. 
   In questo caso, ["/home"] rappresenta la rotta /home.
@@ -75,6 +81,7 @@ Questa API rende più concisa l'iniezione dei servizi, eliminando la necessità 
         },
         error: (errorResponse) => {
           console.error('Login failed:',errorResponse);  // Gestisce la risposta d'errore
+          this.loginError = true;
           this.errore = errorResponse;
         }
       });

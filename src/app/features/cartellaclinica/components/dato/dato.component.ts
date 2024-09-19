@@ -22,7 +22,6 @@ import { ImmagineResponse } from '../../../../core/models/immagine-response.mode
 export class DatoComponent implements OnInit {
   datoId: any;
   dato: Dato | null = null;
-  selectedImageId: string = "";
   selectedImageData!: SafeUrl;
   selectedImageNome: string = "";  // Store the name of the selected image
 
@@ -31,7 +30,7 @@ export class DatoComponent implements OnInit {
     private immaginiService: ImmaginiService,
     private sanitizer: DomSanitizer,
     private datiService: DatiService,
-   private route: ActivatedRoute
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -61,7 +60,8 @@ export class DatoComponent implements OnInit {
       next: (response) => {
         const objectURL = `data:${response.type};base64,${response.base64Date}`;
         this.selectedImageData = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        this.selectedImageNome = response.nomeFile || 'Unknown';  // Store the image name
+        this.selectedImageNome = response.nomeFile || 'Unknown'; 
+        
       },
       error: (errorResponse) => {
         console.error('Errore durante il recupero dei dati della immagine', errorResponse);

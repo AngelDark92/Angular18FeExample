@@ -13,6 +13,6 @@ export class ImmaginiService {
 
   getImmagine(immagineId: any): Observable<ImmagineResponse> {
     const params = new HttpParams().set('immagineId', immagineId);
-    return this.http.get(`${this.baseUrl}/immagine/get-immagine`, { params });
+    return this.http.get(`${this.baseUrl}/immagine/get-immagine-base64-by-id`, { params });
   }
 }

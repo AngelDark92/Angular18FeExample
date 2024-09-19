@@ -1,41 +1,42 @@
 <ng-container *ngIf="dato">
-  <mat-card class="dato-card">
-    <mat-card-header>
-      <mat-card-title>Dettagli del Dato</mat-card-title>
-      <mat-card-subtitle>Reparto: {{ dato.reparto }}</mat-card-subtitle>
-    </mat-card-header>
+    <mat-card class="dato-card">
+        <mat-card-header>
+            <mat-card-title>Dettagli del Dato</mat-card-title>
+        </mat-card-header>
 
-    <mat-card-content>
-      <p><strong>Diagnosi:</strong> {{ dato.diagnosi }}</p>
-      <p><strong>Terapia:</strong> {{ dato.terapia }}</p>
+        <mat-card-content>
+            <p><strong>Reparto:</strong> {{ dato.reparto }}</p>
+            <p><strong>Diagnosi:</strong> {{ dato.diagnosi }}</p>
+            <p><strong>Terapia:</strong> {{ dato.terapia }}</p>
 
-      <!-- Se ci sono immagini, le visualizza -->
-      <div *ngIf="(dato?.immagini ?? []).length > 0">
-        <mat-divider></mat-divider>
-        <h3>Immagini:</h3>
+            <!-- Se ci sono immagini, le visualizza -->
+            <div *ngIf="(dato?.immagini ?? []).length > 0">
+                <mat-divider></mat-divider>
+                <h3>Immagini:</h3>
 
-        <!-- Angular Material Select for selecting images by name -->
-        <mat-form-field>
-          <mat-label>Seleziona immagine</mat-label>
-          <mat-select [(value)]="selectedImageId" (selectionChange)="onImageSelect($event)">
-            <mat-option *ngFor="let immagine of dato.immagini" [value]="immagine.id">
-              {{ immagine.nome }} <!-- Display the image name -->
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+                <!-- Angular Material Select for selecting images by name -->
+                <mat-form-field>
+                    <mat-label>Seleziona immagine</mat-label>
+                    <mat-select (selectionChange)="onImageSelect($event)">
+                        <!-- il value è l'id dell'immagine che selezioni, l'evento avrà quel value-->
+                        <mat-option *ngFor="let immagine of dato.immagini" [value]="immagine.id">
+                            {{ immagine.nome }} <!-- Display the image name -->
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-        <!-- Display the selected image in the mat-grid-tile -->
-        <mat-grid-list cols="1" rowHeight="200px">
-          <mat-grid-tile *ngIf="selectedImageData">
-            <img [src]="selectedImageData" alt="Immagine dato" />
-          </mat-grid-tile>
-        </mat-grid-list>
-      </div>
-    </mat-card-content>
-  </mat-card>
+                <!-- Display the selected image in the mat-grid-tile -->
+                <mat-grid-list cols="1" rowHeight="800px">
+                    <mat-grid-tile *ngIf="selectedImageData">
+                        <img [src]="selectedImageData" alt="Immagine dato" />
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </mat-card-content>
+    </mat-card>
 </ng-container>
 
 <!-- Nel caso in cui il dato non sia presente -->
 <ng-container *ngIf="!dato">
-  <p>Nessun dato disponibile.</p>
+    <p>Nessun dato disponibile.</p>
 </ng-container>
