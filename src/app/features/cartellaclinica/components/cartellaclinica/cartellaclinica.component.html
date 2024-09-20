@@ -36,11 +36,10 @@
     <td mat-cell *matCellDef="let dato">
         <mat-form-field>
             <mat-label>Immagini</mat-label>
-            <mat-select [(value)]="dato.immagine.id">
+            <mat-select [(value)]="dato.immagini.id">
                 <!-- value prende il valore che voglio passare e selezionare -->
-                <mat-option *ngFor="let immagine of dato.immagini" [value]="immagine.id">
-                    {{immagine.nome}}
-                </mat-option>
+                <mat-option *ngFor="let immagine of dato.immagini" 
+                [value]="immagine.id">{{immagine.nome}}</mat-option>
             </mat-select>
         </mat-form-field>
     </td>
@@ -49,16 +48,16 @@
 <ng-container matColumnDef="visualizza">
     <th mat-header-cell *matHeaderCellDef> Azioni </th>
     <td mat-cell *matCellDef="let dato">
-        <div style="display: flex; gap: 10px;">
+        <div style="display: flex; gap: 10px; justify-content: space-evenly">
             <!-- Abilita/disabilita in base al valore di dato.immagineId -->
             <button mat-raised-button color="primary" 
-                (click)="visualizza(dato.immagine.id)" 
+                (click)="visualizza(dato.immagini.id)" 
                 class="material-icons pageview"
-                [disabled]="!dato.immagine.id">Visualizza</button>
+                [disabled]="!dato.immagini.id"><mat-icon>pageview</mat-icon>Visualizza</button>
 
-            <button mat-raised-button color="primary" 
-                (click)="elimina(dato.immagine.id)" 
-                class="material-icons delete"> Elimina</button>
+            <button *ngIf="userData?.medicoDTO" mat-raised-button color="primary" 
+                (click)="eliminaDato(dato.id)" 
+                class="material-icons delete red-button"> <mat-icon>delete</mat-icon> Elimina</button>
         </div>
     </td>
 </ng-container>

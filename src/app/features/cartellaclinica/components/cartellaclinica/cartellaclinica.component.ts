@@ -32,6 +32,7 @@ export class CartellaclinicaComponent implements OnInit {
   userData: Utenti | null = null;
   cartellaId: any;
   pazienteId: any;
+  datoId : any;
 
 
 
@@ -82,9 +83,26 @@ export class CartellaclinicaComponent implements OnInit {
     this.router.navigate(['/immagine', immagineId]);
   }
 
-  elimina(immagineId: any): void {
-    this.router.navigate(['/cartella-clinica', this.immagineId])
+  eliminaDato(datoId: any): void {
+    // Chiamata al servizio per eliminare il dato solo se l'utente è un medico
+    if (this.idMedico) {
+      this.datiService.eliminaDato(datoId).subscribe({
+        next: () => {
+          // Rimuovi il dato dalla lista locale dopo l'eliminazione
+          if (this.dati?.dati) {
+            this.dati.dati = this.dati.dati.filter(dato => dato.id !== datoId);
+          }
+          console.log('Dato eliminato con successo');
+        },
+        error: (errorResponse) => {
+          console.error('Errore durante l\'eliminazione del dato', errorResponse);
+        }
+      });
+    } else {
+      console.error('L\'utente non è un medico, eliminazione non consentita');
+    }
   }
+
 
 }
 

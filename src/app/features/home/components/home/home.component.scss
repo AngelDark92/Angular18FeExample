@@ -13,7 +13,7 @@ p {
 }
 
 .image-container span{
-  font-size: 18px;  /* dimensione*/
+  font-size: 25px;  /* dimensione*/
   /*font-style: italic; /* Corsivo */
   font-weight: bold;  /* Grassetto */
   align-items: center;
@@ -33,15 +33,10 @@ mat-card {
   width: 800px;
   padding: 1em;
   margin-left: 300px;
-  margin-top: 100px;
+  margin-top: 50px;
  
 }
-.transparent-card {
-  background-color: rgba(255, 255, 255, 0.5); /* Trasparente */
-  /* Rimuove l'ombra */
-  border-color: rgb(35, 119, 184);
-  
-}
+
 
 
 

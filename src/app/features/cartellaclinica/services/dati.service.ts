@@ -23,6 +23,7 @@ export class DatiService {
     return this.http.get(`${this.baseUrl}/dato/get-dati`, { params });
   }
 
+  
   getListaCartelle(utenti : Utenti) : Observable<Cartellaclinica[]>{
     //TODO per adesso usiamo post ma poi è un get quano usiamo spring security
     return this.http.post<Cartellaclinica[]>(this.baseUrl+"/cartella/post-lista-cartelle", utenti);
@@ -39,11 +40,15 @@ export class DatiService {
     .set('cartellaId', cartellaId); 
     return this.http.delete(`${this.baseUrl}/cartella/elimina-cartella-by-id`, { params, responseType: 'text' });
   }
+
+  eliminaDato(datoId: any): Observable<any> {
+    const params = new HttpParams().set('datoId', datoId);
+    return this.http.delete(`${this.baseUrl}/dato/elimina-dato-by-id`, { params, responseType: 'text' });
+  }
   
+
+
   
-
-
-
   
 
   

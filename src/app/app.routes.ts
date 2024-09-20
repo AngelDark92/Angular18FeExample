@@ -9,6 +9,7 @@ import { CartellaclinicaComponent } from './features/cartellaclinica/components/
 import { VisualizzaImmagineComponent } from './features/cartellaclinica/components/visualizza-immagine/visualizza-immagine.component';
 import { ListaCartelleComponent } from './features/cartellaclinica/components/lista-cartelle/lista-cartelle.component';
 import { DatoComponent } from './features/cartellaclinica/components/dato/dato.component';
+import { ListaPazientiComponent } from './features/users/components/lista-pazienti/lista-pazienti.component';
 
 
 
@@ -23,12 +24,11 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'cartella-clinica', component: CartellaclinicaComponent},
       { path: 'cartelle-cliniche', component: ListaCartelleComponent},
+      { path: 'pazienti', component: ListaPazientiComponent},
       { path: 'immagine/:id', component: VisualizzaImmagineComponent},
       { path: 'cartella-clinica/:id', component: CartellaclinicaComponent},
       { path: 'dato/:id', component: DatoComponent},
-
-      
-         
+  
         ]
       },
       

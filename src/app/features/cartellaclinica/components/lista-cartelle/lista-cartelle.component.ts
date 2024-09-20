@@ -42,7 +42,7 @@ export class ListaCartelleComponent implements OnInit {
           this.cartelle = response;
         },
         error: (errorResponse) => {
-          console.error('Errore durante il recupero dela lista delle cartelle', errorResponse);
+          console.error('Errore durante il recupero della lista delle cartelle', errorResponse);
 
         }
       })

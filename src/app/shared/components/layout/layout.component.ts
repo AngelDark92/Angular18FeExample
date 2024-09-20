@@ -60,7 +60,9 @@ export class LayoutComponent implements OnInit {
     else if(this.userData?.medicoDTO){
       this.links = [
         { path: '/home', label: 'Home' },
-        { path: '/cartelle-cliniche', label: 'Cartelle Cliniche' },
+        { path: '/cartelle-cliniche', label: 'Lista cartelle cliniche' },
+        { path: '/pazienti', label: 'Lista pazienti' },
+
        
  
       ];

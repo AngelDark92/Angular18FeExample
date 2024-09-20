@@ -1,53 +1,60 @@
 table {
-    width: 100%;
-  }
-  
-  
-  .header {
-    display: flex;
-    padding: 0 1em;
-    color: white;
-    align-content: flex-start;
-    border: 1px solid black !important;
-  }
-  .span {
-    justify-content: start;
-  }
+  width: 100%;
+}
 
-  .custom-select .mat-form-field{
-    background-color:white;
-  }
-  .mat-toolbar{
-    height: 10%;
-    
-  }
 
-  .mat-toolbar.mat-primary {
-    --mat-toolbar-container-background-color: #99a6ed;
-    --mat-toolbar-container-text-color: white;
+.header {
+  display: flex;
+  padding: 0 1em;
+  color: white;
+  align-content: flex-start;
+  
+  border: 1px solid black !important;
+}
+.span {
+  justify-content: start;
+}
+
+.custom-select .mat-form-field{
+  background-color:white;
+}
+.mat-toolbar{
+  height: 10%;
+  
+}
+
+.mat-toolbar.mat-primary {
+  --mat-toolbar-container-background-color: #99a6ed;
+  --mat-toolbar-container-text-color: white;
 }
 
 
 .custom th {
-  border: 1px solid black !important; /* Garantisce i bordi per le intestazioni */
-  padding: 8px;
-  font-weight: bold; /* Rende il testo della riga dell'intestazione in grassetto */
-  text-align: center;
+border: 1px solid black !important; /* Garantisce i bordi per le intestazioni */
+padding: 8px;
+font-weight: bold; /* Rende il testo della riga dell'intestazione in grassetto */
+text-align: center;
+
 }
 
 .custom td {
-  border: 1px solid black !important; /* Garantisce i bordi per le righe di dati */
-  padding: 8px;
-  text-align: center;
+border: 1px solid black !important; /* Garantisce i bordi per le righe di dati */
+padding: 8px;
+text-align: center;
 }
 
 table {
-  border-collapse: collapse; /* This ensures the borders don't double up */
-  width: 100%;
+border-collapse: collapse; /* This ensures the borders don't double up */
+width: 100%;
 }
 
 tr.mat-header-row {
-  background-color: #e0e0e0; /* Optional: style header row background */
+background-color: #e0e0e0; /* Optional: style header row background */
+}
+
+.red-button {
+  background-color: rgb(236, 47, 47) !important; /* Forza lo sfondo rosso */
+  color: white !important; /* Imposta il testo e le icone in bianco */
 }
 
 
@@ -58,6 +65,8 @@ tr.mat-header-row {
 
 
 
-  
-  
- 
+
+
+
+
+
