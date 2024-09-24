@@ -5,6 +5,7 @@ import { Utenti } from '../../../core/models/utenti.model';
 import { Cartellaclinica } from '../../../core/models/cartellaclinica.model';
 import { Dato } from '../../../core/models/dato.model';
 import { ListaDati } from '../../../core/models/lista-dati.model';
+import { Immagine } from '../../../core/models/immagine.model';
 
 
 
@@ -45,14 +46,16 @@ export class DatiService {
     const params = new HttpParams().set('datoId', datoId);
     return this.http.delete(`${this.baseUrl}/dato/elimina-dato-by-id`, { params, responseType: 'text' });
   }
+
+  aggiungiImmagine(formData: FormData, datoId: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/immagine/crea-immagine`, formData, {
+      params: { datoId } // 
+    });
+  }
+  
+
+  }
   
 
 
   
-  
-
-  
-
-
-
-}

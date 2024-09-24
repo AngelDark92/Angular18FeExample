@@ -1,0 +1,43 @@
+<form (ngSubmit)="crea()" [formGroup]="createImageForm" enctype="multipart/form-data">
+    <!-- File input field -->
+    <mat-form-field appearance="fill">
+      <mat-label>Carica immagine</mat-label>
+      <input type="file" (change)="onFileChange($event)" required />
+      <mat-hint *ngIf="!fileUploaded && createImageForm.touched" style="color: red;">
+        Il caricamento del file è obbligatorio.
+      </mat-hint>
+    </mat-form-field>
+  
+    <!-- Nome immagine (manually entered) -->
+    <mat-form-field appearance="fill">
+      <mat-label>Nome immagine</mat-label>
+      <input matInput id="nome" formControlName="immagine.nome" placeholder="Inserisci il nome dell'immagine" required />
+      <mat-error *ngIf="createImageForm.get('immagine.nome')?.invalid && createImageForm.get('immagine.nome')?.touched">
+        Il nome dell'immagine è obbligatorio.
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Data di inserimento -->
+    <mat-form-field appearance="fill">
+      <mat-label>Data di inserimento</mat-label>
+      <input matInput [matDatepicker]="picker" id="dataInserimento" formControlName="immagine.dataInserimento" required />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="createImageForm.get('immagine.dataInserimento')?.invalid && createImageForm.get('immagine.dataInserimento')?.touched">
+        La data di inserimento è obbligatoria.
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Tipo di immagine -->
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo di immagine</mat-label>
+      <input matInput id="tipo" formControlName="immagine.tipo" placeholder="Tipo di immagine (es. MRI, X-ray)" required />
+      <mat-error *ngIf="createImageForm.get('immagine.tipo')?.invalid && createImageForm.get('immagine.tipo')?.touched">
+        Il tipo di immagine è obbligatorio.
+      </mat-error>
+    </mat-form-field>
+  
+    <!-- Submit button -->
+    <button mat-raised-button color="primary" type="submit">Crea Immagine</button>
+  </form>
+  

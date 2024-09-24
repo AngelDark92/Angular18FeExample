@@ -10,6 +10,7 @@ import { VisualizzaImmagineComponent } from './features/cartellaclinica/componen
 import { ListaCartelleComponent } from './features/cartellaclinica/components/lista-cartelle/lista-cartelle.component';
 import { DatoComponent } from './features/cartellaclinica/components/dato/dato.component';
 import { ListaPazientiComponent } from './features/users/components/lista-pazienti/lista-pazienti.component';
+import { CreaImmagineComponent } from './features/cartellaclinica/components/crea-immagine/crea-immagine.component';
 
 
 
@@ -28,6 +29,9 @@ export const routes: Routes = [
       { path: 'immagine/:id', component: VisualizzaImmagineComponent},
       { path: 'cartella-clinica/:id', component: CartellaclinicaComponent},
       { path: 'dato/:id', component: DatoComponent},
+      { path: 'nuova-immagine/:id', component: CreaImmagineComponent},
+
+      
   
         ]
       },

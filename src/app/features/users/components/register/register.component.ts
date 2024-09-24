@@ -24,7 +24,7 @@ import { MessageService } from '../../../../shared/services/message.service';
     MatSelectModule,
     MatOptionModule,
     MatCardModule,
-    ReactiveFormsModule,],
+    ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

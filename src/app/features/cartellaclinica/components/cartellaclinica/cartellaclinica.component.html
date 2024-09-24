@@ -55,6 +55,10 @@
                 class="material-icons pageview"
                 [disabled]="!dato.immagini.id"><mat-icon>pageview</mat-icon>Visualizza</button>
 
+                <button *ngIf="userData?.medicoDTO" mat-raised-button color="primary" 
+                (click)="nuovaImmagine(dato.id)" 
+                class="material-icons add_box"> <mat-icon>add_box</mat-icon> Carica una nuova immagine</button>
+
             <button *ngIf="userData?.medicoDTO" mat-raised-button color="primary" 
                 (click)="eliminaDato(dato.id)" 
                 class="material-icons delete red-button"> <mat-icon>delete</mat-icon> Elimina</button>

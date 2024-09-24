@@ -56,7 +56,7 @@ export class ListaPazientiComponent implements OnInit{
   elimina(pazienteId: any): void {
     // Chiamata al servizio per eliminare la cartella
     if(this.idMedico) {
-      this.pazientiService.eliminaPaziente(pazienteId).subscribe({
+      this.pazientiService.eliminaPaziente(pazienteId).subscribe({ // in base a come si riempiono i parametri dell'observable si entra in next o error
         next: () => {
           
           this.pazienti = this.pazienti.filter(paziente => paziente.id !== pazienteId);

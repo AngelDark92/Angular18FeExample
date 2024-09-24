@@ -103,8 +103,16 @@ export class CartellaclinicaComponent implements OnInit {
     }
   }
 
-
+  nuovaImmagine(datoId: any): void {
+    this.router.navigate(['/nuova-immagine', datoId]);
+  }
+  
 }
+
+
+  
+
+
 
 
 
