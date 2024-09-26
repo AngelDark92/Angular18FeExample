@@ -29,7 +29,7 @@ export class PazientiService {
     .set('medicoId', medicoId)
     .set('pazienteId', pazienteId);
   console.log(pazienteId + " " + medicoId);
-    return this.http.post(`${this.baseUrl}/cartella/crea-cartella`, { params });
+    return this.http.post(`${this.baseUrl}/cartella/crea-cartella`, null, { params });
   }
 
 }
