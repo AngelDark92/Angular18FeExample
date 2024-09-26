@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ListaDati } from '../../../../core/models/lista-dati.model';
 import { MatIconModule } from '@angular/material/icon';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 
 
@@ -39,7 +40,7 @@ export class CartellaclinicaComponent implements OnInit {
   displayedColumns: string[] = ['reparto', 'diagnosi', 'terapia', 'cartellaClinica', 'immagine', "visualizza"];
 
 
-  constructor(private datiService: DatiService, private userService: UserService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private datiService: DatiService, private userService: UserService, private router: Router, private route: ActivatedRoute, private errorService: ErrorService) { }
 
 
   ngOnInit(): void {
@@ -54,7 +55,7 @@ export class CartellaclinicaComponent implements OnInit {
           this.dati = response;
         },
         error: (errorResponse) => {
-          console.error('Errore durante il recupero dei dati', errorResponse);
+          this.errorService.reportError(errorResponse);
 
         }
       });
@@ -66,7 +67,8 @@ export class CartellaclinicaComponent implements OnInit {
           this.dati = response;
         },
         error: (errorResponse) => {
-          console.error('Errore durante il recupero dei dati', errorResponse);
+          this.errorService.reportError(errorResponse);
+
 
         }
       });
@@ -94,7 +96,8 @@ export class CartellaclinicaComponent implements OnInit {
           console.log('Dato eliminato con successo');
         },
         error: (errorResponse) => {
-          console.error('Errore durante l\'eliminazione del dato', errorResponse);
+          this.errorService.reportError(errorResponse);
+
         }
       });
     } else {
@@ -105,11 +108,11 @@ export class CartellaclinicaComponent implements OnInit {
   nuovaImmagine(datoId: any): void {
     this.router.navigate(['/nuova-immagine', datoId]);
   }
-  
+
 }
 
 
-  
+
 
 
 

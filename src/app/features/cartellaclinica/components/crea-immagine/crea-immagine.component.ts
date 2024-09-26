@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 // Funzione per il validatore della data
 export function dateFormatValidator(): ValidatorFn {
@@ -44,7 +45,7 @@ export class CreaImmagineComponent {
 
   private baseUrl = "http://localhost:8080";
 
-  constructor(private datiService: DatiService, private route: ActivatedRoute, public fb: FormBuilder, public router: Router, private messageService: MessageService) {
+  constructor(private datiService: DatiService, private route: ActivatedRoute, public fb: FormBuilder, public router: Router, private messageService: MessageService, private errorService:ErrorService) {
     this.createImageForm = this.fb.group({
       nome: [" ", [Validators.required]], // Nome dell'immagine
       tipo: ['', Validators.required], // Base64 del file
@@ -88,7 +89,8 @@ export class CreaImmagineComponent {
           this.messageService.setMessage('Immagine creata con successo.');
         },
         error: (errorResponse) => {
-          console.error('Errore durante la creazione dell\'immagine', errorResponse);
+          this.errorService.reportError(errorResponse);
+
         }
       });
     } else {

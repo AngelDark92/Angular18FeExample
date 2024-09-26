@@ -13,6 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class ListaCartelleComponent implements OnInit {
   datoId: any;
   displayedColumns: string[] = ['nomePaziente', 'cognomePaziente', 'codiceFiscale', 'dato', 'visualizza'];
 
-  constructor(private userService: UserService, private datiService: DatiService, private router: Router) { }
+  constructor(private userService: UserService, private datiService: DatiService, private router: Router, private errorService:ErrorService) { }
 
   ngOnInit(): void {
     this.userData = this.userService.getUtentiData();
@@ -42,7 +43,7 @@ export class ListaCartelleComponent implements OnInit {
           this.cartelle = response;
         },
         error: (errorResponse) => {
-          console.error('Errore durante il recupero della lista delle cartelle', errorResponse);
+          this.errorService.reportError(errorResponse);
 
         }
       })
@@ -70,7 +71,8 @@ export class ListaCartelleComponent implements OnInit {
           console.log('Cartella eliminata con successo');
         },
         error: (errorResponse) => {
-          console.error('Errore durante l\'eliminazione della cartella', errorResponse);
+          this.errorService.reportError(errorResponse);
+
         }
       });
     }else {

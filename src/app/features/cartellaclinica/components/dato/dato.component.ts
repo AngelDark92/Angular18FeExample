@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatOption, MatSelect } from '@angular/material/select';
 import { ImmagineResponse } from '../../../../core/models/immagine-response.model';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-dato',
@@ -30,7 +31,8 @@ export class DatoComponent implements OnInit {
     private immaginiService: ImmaginiService,
     private sanitizer: DomSanitizer,
     private datiService: DatiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private errorService:ErrorService
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class DatoComponent implements OnInit {
           this.dato = response;
         },
         error: (errorResponse) => {
-          console.error('Errore durante il recupero dei dati', errorResponse);
+          this.errorService.reportError(errorResponse);
 
         }
       });
@@ -60,11 +62,11 @@ export class DatoComponent implements OnInit {
       next: (response) => {
         const objectURL = `data:${response.type};base64,${response.base64Date}`;
         this.selectedImageData = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        this.selectedImageNome = response.nomeFile || 'Unknown'; 
-        
+        this.selectedImageNome = response.nomeFile || 'Unknown';
+
       },
       error: (errorResponse) => {
-        console.error('Errore durante il recupero dei dati della immagine', errorResponse);
+        this.errorService.reportError(errorResponse);
 
       }});
   }

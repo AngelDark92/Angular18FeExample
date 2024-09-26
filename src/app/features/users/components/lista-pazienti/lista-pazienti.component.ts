@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 import { Cartellaclinica } from '../../../../core/models/cartellaclinica.model';
 import { PazienteConCartella } from '../../../../core/models/paziente-con-cartella.model';
 import { response } from 'express';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-lista-pazienti',
@@ -33,7 +34,7 @@ export class ListaPazientiComponent implements OnInit {
   pazienti: PazienteConCartella[] = []; // Aggiunge temporaneamente cartellaClinicaId
   displayedColumns: string[] = ['nome', 'cognome', 'codiceFiscale', 'comuneDiResidenza', 'email', 'numeroDiTelefono', 'cartellaClinica', 'visualizza'];
 
-  constructor(private userService: UserService, private pazientiService: PazientiService, private router: Router) { }
+  constructor(private userService: UserService, private pazientiService: PazientiService, private router: Router, private errorService:ErrorService) { }
 
   ngOnInit(): void {
     this.userData = this.userService.getUtentiData();
@@ -45,7 +46,8 @@ export class ListaPazientiComponent implements OnInit {
           this.pazienti = response;
         },
         error: (errorResponse) => {
-          console.error('Errore durante il recupero della lista dei pazienti', errorResponse);
+          this.errorService.reportError(errorResponse);
+
 
         }
       })
@@ -69,7 +71,8 @@ export class ListaPazientiComponent implements OnInit {
           console.log('Paziente eliminata con successo');
         },
         error: (errorResponse) => {
-          console.error('Errore durante l\'eliminazione del paziente', errorResponse);
+          this.errorService.reportError(errorResponse);
+
         }
       });
     } else {
@@ -77,18 +80,19 @@ export class ListaPazientiComponent implements OnInit {
     }
   }
 
-  
+
 
   creaCartella(pazienteId: any, medicoId:any ): void {
     this.pazientiService.creaCartellaClinicaPerPaziente(pazienteId,medicoId).subscribe({
       next: () => {
-        
+
         this.router.navigate(["/cartella-clinica"], pazienteId);
 
 
       },
       error: (errorResponse) => {
-        console.error('Errore durante il rilevamento dell\' id della cartella', errorResponse);
+        this.errorService.reportError(errorResponse);
+
       }
     });
   }

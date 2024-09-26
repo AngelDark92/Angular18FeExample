@@ -17,13 +17,14 @@ import { SafeUrl, DomSanitizer } from '@angular/platform-browser';
 import { DatiService } from '../../services/dati.service';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ErrorService } from '../../../../shared/services/error.service';
 
 @Component({
   selector: 'app-visualizza-immagine',
   standalone: true,
   imports: [
     MatButtonModule,
-    MatGridListModule, 
+    MatGridListModule,
     MatDividerModule,
     MatMenuModule,
     RouterModule,
@@ -45,7 +46,7 @@ export class VisualizzaImmagineComponent {
 
 
   constructor(private route: ActivatedRoute, private userService: UserService, private immaginiService: ImmaginiService, private router: Router,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer, private errorService:ErrorService) { }
 
   ngOnInit(): void {
     this.userData = this.userService.getUtentiData();
@@ -55,11 +56,12 @@ export class VisualizzaImmagineComponent {
         console.log('Dati immagine ricevuti', response);
         const objectURL = `data:${response.type};base64,${response.base64Date}`;
         this.selectedImageData = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-        this.selectedImageNome = response.nomeFile || 'Unknown'; 
+        this.selectedImageNome = response.nomeFile || 'Unknown';
         this.immagine = response;
       },
       error: (errorResponse) => {
-        console.error('Errore durante il recupero dei dati della immagine', errorResponse);
+        this.errorService.reportError(errorResponse);
+
 
       }
     });
@@ -69,5 +71,5 @@ export class VisualizzaImmagineComponent {
     this.router.navigate([`/${route}`]);
 
   }
-  
+
   }
