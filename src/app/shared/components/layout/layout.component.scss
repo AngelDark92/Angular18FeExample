@@ -75,11 +75,6 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
 .custom th,
 .custom td {
   border: 1px solid #ccc;
@@ -96,18 +91,29 @@ tr.mat-header-row {
   background-color: #e0e0e0;
 }
 
-.mat-elevation-z8 {
-  box-shadow: none;
-  /* Remove default shadow if not needed */
-}
-
 .red-button {
   background-color: #ec2f2f !important;
   color: white !important;
 }
 
-.error-snackbar {
-  background-color: #f44336;
-  /* Red background */
-  color: #fff;
+/* Media Queries */
+@media (max-width: 768px) {
+  /* Hide desktop menu and show mobile menu */
+  .desktop-menu {
+    display: none;
+  }
+  .mobile-menu {
+    display: flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Show desktop menu and hide mobile menu */
+  .desktop-menu {
+    display: flex;
+  }
+  .mobile-menu {
+    display: none;
+  }
 }

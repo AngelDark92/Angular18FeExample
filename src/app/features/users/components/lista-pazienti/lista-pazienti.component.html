@@ -55,21 +55,25 @@
       </ng-container>
       
 
-    <ng-container matColumnDef="visualizza">
+      <ng-container matColumnDef="visualizza">
         <th mat-header-cell *matHeaderCellDef> Azioni </th>
         <td mat-cell *matCellDef="let paziente">
             <div style="display: flex; gap: 10px;">
                 <button mat-raised-button color="primary" (click)="visualizzaDatiCartella(paziente.paziente?.id)"
-                    class="material-icons pageview"> <mat-icon>pageview</mat-icon> Dati cartella clinica</button>
-
-                    
-
-                <button mat-raised-button color="warm" (click)="elimina(paziente.paziente?.id)"
-                    class="material-icons delete red-button"><mat-icon>delete</mat-icon>Elimina
+                    [disabled]="!paziente.cartellaId" class="material-icons pageview"> 
+                    <mat-icon>pageview</mat-icon> Dati cartella clinica
+                </button>
+     <!-- ngClass viene usato per applicare dinamicamente la classe in base allo stato disabled del pulsante -->
+                <button mat-raised-button (click)="elimina(paziente.paziente?.id)" 
+                    [disabled]="!paziente.cartellaId"
+                    [ngClass]="paziente.cartellaId ? 'red-button' : 'gray-button'" 
+                    class="material-icons delete">
+                    <mat-icon>delete</mat-icon> Elimina
                 </button>
             </div>
         </td>
     </ng-container>
+    
 
     <!-- Header e righe -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

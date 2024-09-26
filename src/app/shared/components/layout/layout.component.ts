@@ -12,6 +12,7 @@ import { MessageService } from '../../services/message.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Subscription } from 'rxjs';
 import { ErrorService } from '../../services/error.service';
+import { MatIcon } from '@angular/material/icon';
 
 
 
@@ -27,7 +28,8 @@ import { ErrorService } from '../../services/error.service';
     RouterModule,
     CommonModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIcon
   ]
 })
 export class LayoutComponent implements OnInit, OnDestroy {
