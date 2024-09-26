@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { MessageService } from '../../services/message.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MatIcon } from '@angular/material/icon';
 
 
 
@@ -25,7 +26,8 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
     RouterModule,
     CommonModule,
     MatCardModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIcon
   ]
 })
 export class LayoutComponent implements OnInit {

@@ -5,7 +5,9 @@
       <img src="assets/hospital-logo.png" alt="Hospital Logo" class="logo" />
       <span class="hospital-name">Hospital Management System</span>
       <span class="spacer"></span>
-      <div class="user-info">
+
+      <!-- User info for large screens -->
+      <div class="user-info desktop-menu">
         <span>Benvenuto</span>
         <span *ngIf="userData?.medicoDTO">
           {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}
@@ -14,6 +16,25 @@
           {{ userData?.pazienteDTO?.nome }} {{ userData?.pazienteDTO?.cognome }}
         </span>
         <button mat-button (click)="logout()">Logout</button>
+      </div>
+
+      <!-- Menu icon for small screens -->
+      <div class="mobile-menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <span>Benvenuto</span>
+            <span *ngIf="userData?.medicoDTO">
+              {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}
+            </span>
+            <span *ngIf="userData?.pazienteDTO">
+              {{ userData?.pazienteDTO?.nome }} {{ userData?.pazienteDTO?.cognome }}
+            </span>
+          </button>
+          <button mat-menu-item (click)="logout()">Logout</button>
+        </mat-menu>
       </div>
     </div>
   </mat-toolbar>
