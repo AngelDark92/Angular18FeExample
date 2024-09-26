@@ -1,17 +1,24 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { DatiService } from '../../services/dati.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from '../../../../shared/services/message.service';
-import { Immagine } from '../../../../core/models/immagine.model';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCardModule } from '@angular/material/card';
+
+// Funzione per il validatore della data
+export function dateFormatValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+      const dateRegex = /^\d{4}-\d{2}-\d{2}$/; // RegEx per YYYY-MM-DD
+      const valid = dateRegex.test(control.value);
+      return valid ? null : { invalidDate: { value: control.value } };
+  };
+}
 
 
 @Component({
@@ -24,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRippleModule,],
+    MatCardModule,
+  ],
   templateUrl: './crea-immagine.component.html',
   styleUrl: './crea-immagine.component.scss'
 })
@@ -38,40 +46,41 @@ export class CreaImmagineComponent {
 
   constructor(private datiService: DatiService, private route: ActivatedRoute, public fb: FormBuilder, public router: Router, private messageService: MessageService) {
     this.createImageForm = this.fb.group({
-      immagine: this.fb.group({
-        nome: [" ", [Validators.required]], // Nome dell'immagine
-        tipo: ['', Validators.required], // Base64 del file
-        dataInserimento: ['', [Validators.required]], // Data di inserimento
+      nome: [" ", [Validators.required]], // Nome dell'immagine
+      tipo: ['', Validators.required], // Base64 del file
+      dataInserimento: ['', [Validators.required, dateFormatValidator()]], // Data di inserimento con validatore
 
-      })
 
     });
+  }
+
+  // Metodo per gestire il caricamento del file
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.fileUploaded = true;  // Set flag to true if a file is uploaded
+      this.selectedFile = file;  // Store the file in the component
+    } else {
+      this.fileUploaded = false; // Set flag to false if no file is uploaded
     }
+  }
 
- // Metodo per gestire il caricamento del file
- onFileChange(event: any) {
-      const file = event.target.files[0];
-      if(file) {
-        this.fileUploaded = true;  // Set flag to true if a file is uploaded
-        this.selectedFile = file;  // Store the file in the component
-      } else {
-        this.fileUploaded = false; // Set flag to false if no file is uploaded
-      }
-    }
+  crea() {
+    this.datoId = this.route.snapshot.paramMap.get("id");
 
-crea() {
-      this.datoId = this.route.snapshot.paramMap.get("id");
+    if (this.createImageForm.valid && this.fileUploaded) {
+      const { nome, dataInserimento, tipo } = this.createImageForm.value;
 
-      if(this.createImageForm.valid && this.fileUploaded) {
       const formData = new FormData();
 
       // Append the file to FormData
       formData.append('file', this.selectedFile);
 
       // Append other form values to FormData
-      formData.append('nome', this.createImageForm.get('immagine.nome')?.value);
-      formData.append('dataInserimento', this.createImageForm.get('immagine.dataInserimento')?.value);
-      formData.append('tipo', this.createImageForm.get('immagine.tipo')?.value);
+      formData.append('nome', this.createImageForm.get('nome')?.value);
+      formData.append('dataInserimento', this.createImageForm.get('dataInserimento')?.value);
+      formData.append('tipo', this.createImageForm.get('tipo')?.value);
+      formData.append('idDato', this.datoId);
 
       this.datiService.aggiungiImmagine(formData, this.datoId).subscribe({
         next: (response) => {

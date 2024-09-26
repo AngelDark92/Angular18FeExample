@@ -1,43 +1,49 @@
-<form (ngSubmit)="crea()" [formGroup]="createImageForm" enctype="multipart/form-data">
-    <!-- File input field -->
-    <mat-form-field appearance="fill">
-      <mat-label>Carica immagine</mat-label>
-      <input type="file" (change)="onFileChange($event)" required />
-      <mat-hint *ngIf="!fileUploaded && createImageForm.touched" style="color: red;">
-        Il caricamento del file è obbligatorio.
-      </mat-hint>
-    </mat-form-field>
+<mat-card>
+    <mat-card-title>Compila i seguenti campi per creare l'immagine!</mat-card-title>
+    <form [formGroup]="createImageForm" (ngSubmit)="crea()">
+      
+      <!-- Caricamento immagine - RIMOSSO mat-form-field per input file -->
+      <div class="full-width">
+        <label for="file">Carica immagine </label>
+        <input id="file" type="file" (change)="onFileChange($event)" required />
+        <mat-error *ngIf="!fileUploaded && createImageForm.touched">
+          Il caricamento del file è obbligatorio.
+        </mat-error>
+      </div>
   
-    <!-- Nome immagine (manually entered) -->
-    <mat-form-field appearance="fill">
-      <mat-label>Nome immagine</mat-label>
-      <input matInput id="nome" formControlName="immagine.nome" placeholder="Inserisci il nome dell'immagine" required />
-      <mat-error *ngIf="createImageForm.get('immagine.nome')?.invalid && createImageForm.get('immagine.nome')?.touched">
-        Il nome dell'immagine è obbligatorio.
-      </mat-error>
-    </mat-form-field>
+      <!-- Nome immagine -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Nome immagine</mat-label>
+        <input matInput formControlName="nome" placeholder="Inserisci il nome dell'immagine" required />
+        <mat-error *ngIf="createImageForm.get('nome')?.invalid && createImageForm.get('nome')?.touched">
+          Il nome dell'immagine è obbligatorio.
+        </mat-error>
+      </mat-form-field>
   
-    <!-- Data di inserimento -->
-    <mat-form-field appearance="fill">
-      <mat-label>Data di inserimento</mat-label>
-      <input matInput [matDatepicker]="picker" id="dataInserimento" formControlName="immagine.dataInserimento" required />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="createImageForm.get('immagine.dataInserimento')?.invalid && createImageForm.get('immagine.dataInserimento')?.touched">
-        La data di inserimento è obbligatoria.
-      </mat-error>
-    </mat-form-field>
+      <!-- Data di inserimento -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Data di Inserimento</mat-label>
+        <input matInput formControlName="dataInserimento" placeholder="YYYY-MM-DD" />
+        <mat-error *ngIf="createImageForm.get('dataInserimento')?.hasError('required')">La data è obbligatoria.</mat-error>
+        <mat-error *ngIf="createImageForm.get('dataInserimento')?.hasError('invalidDate')">Il formato deve essere YYYY-MM-DD.</mat-error>
+      </mat-form-field>
   
-    <!-- Tipo di immagine -->
-    <mat-form-field appearance="fill">
-      <mat-label>Tipo di immagine</mat-label>
-      <input matInput id="tipo" formControlName="immagine.tipo" placeholder="Tipo di immagine (es. MRI, X-ray)" required />
-      <mat-error *ngIf="createImageForm.get('immagine.tipo')?.invalid && createImageForm.get('immagine.tipo')?.touched">
-        Il tipo di immagine è obbligatorio.
-      </mat-error>
-    </mat-form-field>
+      <!-- Tipo di immagine -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Tipo di immagine</mat-label>
+        <input matInput formControlName="tipo" placeholder="Tipo di immagine (es. MRI, X-ray)" required />
+        <mat-error *ngIf="createImageForm.get('tipo')?.invalid && createImageForm.get('tipo')?.touched">
+          Il tipo di immagine è obbligatorio.
+        </mat-error>
+      </mat-form-field>
   
-    <!-- Submit button -->
-    <button mat-raised-button color="primary" type="submit">Crea Immagine</button>
-  </form>
+      <!-- Bottone di invio -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="createImageForm.invalid">
+          Crea Immagine
+        </button>
+      </div>
+  
+    </form>
+  </mat-card>
   

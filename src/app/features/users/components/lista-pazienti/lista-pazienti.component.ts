@@ -13,6 +13,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { Cartellaclinica } from '../../../../core/models/cartellaclinica.model';
+import { PazienteConCartella } from '../../../../core/models/paziente-con-cartella.model';
+import { response } from 'express';
 
 @Component({
   selector: 'app-lista-pazienti',
@@ -22,11 +25,13 @@ import { Router } from '@angular/router';
   templateUrl: './lista-pazienti.component.html',
   styleUrl: './lista-pazienti.component.scss'
 })
-export class ListaPazientiComponent implements OnInit{
+export class ListaPazientiComponent implements OnInit {
   idMedico: any;
   userData: Utenti | null = null;
-  pazienti: Paziente[] = [];
-  displayedColumns: string[] = ['nome', 'cognome', 'codiceFiscale', 'comuneDiResidenza', 'email', 'numeroDiTelefono', 'visualizza' ];
+  cartellaId: any
+  cartella!: Cartellaclinica
+  pazienti: PazienteConCartella[] = []; // Aggiunge temporaneamente cartellaClinicaId
+  displayedColumns: string[] = ['nome', 'cognome', 'codiceFiscale', 'comuneDiResidenza', 'email', 'numeroDiTelefono', 'cartellaClinica', 'visualizza'];
 
   constructor(private userService: UserService, private pazientiService: PazientiService, private router: Router) { }
 
@@ -49,26 +54,43 @@ export class ListaPazientiComponent implements OnInit{
   }
 
   visualizzaDatiCartella(pazienteId: any): void {
-      this.router.navigate(['/cartella-clinica', pazienteId]);
-    
+    this.router.navigate(['/cartella-clinica', pazienteId]);
+
   }
+
 
   elimina(pazienteId: any): void {
     // Chiamata al servizio per eliminare la cartella
-    if(this.idMedico) {
+    if (this.idMedico) {
       this.pazientiService.eliminaPaziente(pazienteId).subscribe({ // in base a come si riempiono i parametri dell'observable si entra in next o error
         next: () => {
-          
-          this.pazienti = this.pazienti.filter(paziente => paziente.id !== pazienteId);
+
+          this.pazienti = this.pazienti.filter(paziente => paziente.paziente?.id !== pazienteId);
           console.log('Paziente eliminata con successo');
         },
         error: (errorResponse) => {
           console.error('Errore durante l\'eliminazione del paziente', errorResponse);
         }
       });
-    }else {
+    } else {
       console.error('Utente non è un medico, non può eliminare la cartella');
     }
+  }
+
+  
+
+  creaCartella(pazienteId: any, medicoId:any ): void {
+    this.pazientiService.creaCartellaClinicaPerPaziente(pazienteId,medicoId).subscribe({
+      next: () => {
+        
+        this.router.navigate(["/cartella-clinica"], pazienteId);
+
+
+      },
+      error: (errorResponse) => {
+        console.error('Errore durante il rilevamento dell\' id della cartella', errorResponse);
+      }
+    });
   }
 
 

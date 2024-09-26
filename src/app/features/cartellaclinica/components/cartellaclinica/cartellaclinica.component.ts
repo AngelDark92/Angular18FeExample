@@ -30,7 +30,6 @@ export class CartellaclinicaComponent implements OnInit {
   id: any;
   idMedico: any;
   userData: Utenti | null = null;
-  cartellaId: any;
   pazienteId: any;
   datoId : any;
 
