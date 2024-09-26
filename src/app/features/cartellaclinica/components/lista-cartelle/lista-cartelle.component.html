@@ -28,17 +28,28 @@
     <ng-container matColumnDef="dato">
         <th mat-header-cell *matHeaderCellDef> Dato </th>
         <td mat-cell *matCellDef="let cartella">
-            <!-- Spostiamo il pulsante sotto il form field -->
-            <mat-form-field>
-                <mat-label>Dato</mat-label>
-                <mat-select [(value)]="cartella.dati.id">
-                    <!--value metto il valore che voglio prendermi dal select e che voglio passare -->
-                    <mat-option *ngFor="let dato of cartella.dati"
-                        [value]="dato.id">{{dato.diagnosi}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <!-- Controlla se ci sono dati nella cartella -->
+            <ng-container *ngIf="cartella.dati?.length > 0; else creaDatoTemplate">
+                <mat-form-field>
+                    <mat-label>Dato</mat-label>
+                    <mat-select [(value)]="cartella.dati.id">
+                        <!-- Mostra la lista di dati se presenti -->
+                        <mat-option *ngFor="let dato of cartella.dati" [value]="dato.id">
+                            {{ dato.diagnosi }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </ng-container>
+            
+            <!-- Se non ci sono dati, mostra il pulsante Crea Dato -->
+            <ng-template #creaDatoTemplate>
+                <button mat-raised-button color="primary" >
+                    Crea Dato
+                </button>
+            </ng-template>
         </td>
     </ng-container>
+    
 
 
     <ng-container matColumnDef="visualizza">
@@ -47,12 +58,14 @@
             <div style="display: flex; gap: 10px;">
                 <button mat-raised-button color="primary"
                     (click)="visualizza(cartella.dati.id)" class="material-icons pageview" 
-                    [disabled]="!cartella.dati.id"> <mat-icon>pageview</mat-icon> Visualizza dato selezionato</button>
+                    [disabled]="!cartella.dati"> <mat-icon>pageview</mat-icon> Visualizza dato selezionato</button>
 
                     <button mat-raised-button color="primary" 
-                    (click)="visualizzaDatiCartella(cartella.pazienteDTO?.id)" class="material-icons pageview" > <mat-icon>pageview</mat-icon>Visualizza Dati Cartella</button>
+                    (click)="visualizzaDatiCartella(cartella.pazienteDTO?.id)" [disabled]="!cartella.dati" class="material-icons pageview" > <mat-icon>pageview</mat-icon>Visualizza Dati Cartella</button>
 
-                 <button mat-raised-button color="warm" (click)="elimina(cartella.id)" class="material-icons delete red-button"><mat-icon>delete</mat-icon>Elimina
+                 <button mat-raised-button color="warm" (click)="elimina(cartella.id)" [disabled]="!cartella.dati" 
+                 [ngClass]="cartella.dati ? 'red-button' : 'gray-button'" 
+                 class="material-icons delete red-button"><mat-icon>delete</mat-icon>Elimina
                 </button>
             </div>
         </td>
