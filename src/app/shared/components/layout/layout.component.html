@@ -1,38 +1,41 @@
 <div class="layout-container">
   <!-- Header -->
-  <mat-toolbar color="primary" class="header">
-    <span>Hospital Management System</span>
-    <mat-card appearance="outlined">
-      <mat-card-header>
-        <mat-card-title> Benvenuto</mat-card-title>
-        <mat-card-subtitle *ngIf="userData?.medicoDTO">{{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="userData?.pazienteDTO">{{ userData?.pazienteDTO?.nome }} {{ userData?.pazienteDTO?.cognome }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-actions>
+  <mat-toolbar color="primary">
+    <div class="header-content">
+      <img src="assets/hospital-logo.png" alt="Hospital Logo" class="logo" />
+      <span class="hospital-name">Hospital Management System</span>
+      <span class="spacer"></span>
+      <div class="user-info">
+        <span>Benvenuto</span>
+        <span *ngIf="userData?.medicoDTO">
+          {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}
+        </span>
+        <span *ngIf="userData?.pazienteDTO">
+          {{ userData?.pazienteDTO?.nome }} {{ userData?.pazienteDTO?.cognome }}
+        </span>
         <button mat-button (click)="logout()">Logout</button>
-      </mat-card-actions>
-    </mat-card> 
+      </div>
+    </div>
   </mat-toolbar>
 
-  <!-- Horizontal Menu -->
-  <nav mat-tab-nav-bar [tabPanel] = "lista">
-    <a
-    mat-tab-link
-    *ngFor="let link of links"
-    [routerLink]="link.path"
-    [active]="activeLink === link.path"
-    (click)="activeLink = link.path">
-    {{ link.label }}
-  </a>
-  </nav>
+  <div class="main-content">
+    <mat-card class="content-card mat-elevation-z8">
+      <!-- Horizontal Menu -->
+      <nav mat-tab-nav-bar [tabPanel]="lista">
+        <a mat-tab-link *ngFor="let link of links" [routerLink]="link.path" [active]="activeLink === link.path"
+          (click)="activeLink = link.path">
+          {{ link.label }}
+        </a>
+      </nav>
 
-  <mat-tab-nav-panel #lista>
-    <router-outlet></router-outlet> <!-- This will display your routed content -->
-  </mat-tab-nav-panel>
-
+      <mat-tab-nav-panel #lista>
+        <router-outlet></router-outlet>
+      </mat-tab-nav-panel>
+    </mat-card>
+  </div>
 
   <!-- Footer -->
-  <footer class="footer">
+  <footer class="footer mat-elevation-z4">
     <p>Hospital Management System &copy; 2024</p>
   </footer>
 </div>

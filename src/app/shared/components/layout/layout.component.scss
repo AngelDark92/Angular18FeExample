@@ -1,35 +1,31 @@
-.layout-container {
+.header-content {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Occupare almeno tutta l'altezza della finestra */
+  align-items: center;
+  width: 100%;
 }
 
-.header {
+.logo {
+  height: 40px;
+  margin-right: 15px;
+}
+
+.hospital-name {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.user-info {
   display: flex;
-  justify-content: space-evenly;
-  padding: 0 1em;
-  color: white;
-  height: auto;
-  
+  align-items: center;
 }
 
-.mat-mdc-tab-header {
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  flex-shrink: 0;
-  margin-bottom: 50px;
-}
-
-
-.span {
-  justify-content: center;
-}
-
-.content {
-  flex-grow: 1; /* La parte principale della pagina si espande */
-  padding: 2em;
-  
+.user-info span {
+  margin-right: 1em;
 }
 
 .footer {
@@ -37,23 +33,75 @@
   color: white;
   text-align: center;
   padding: 1em;
-  margin-top: auto; /* Spinge il footer in basso */
-  width: 100%; /* Occupa l'intera larghezza */
-  position: relative; /* Rimuove spazio aggiuntivo */
-  bottom: 0; /* Assicura che sia sempre sul fondo */
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  left: 0;
 }
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.content-card {
+  flex-grow: 1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .mat-tab-link.active {
   font-weight: bold;
   color: blue;
 }
-.header mat-card {
-  width: auto;
-    max-width: 300px;
-    background-color: rgb(63 139 181);
-    box-shadow: none;
-    max-height: 200px;
-    margin-right: -400px;
+
+.mat-toolbar.mat-primary {
+  background-color: #99a6ed;
+  color: white;
 }
-    
 
+.mat-elevation-z4 {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
 
+.mat-elevation-z8 {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom th,
+.custom td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.custom th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+tr.mat-header-row {
+  background-color: #e0e0e0;
+}
+
+.mat-elevation-z8 {
+  box-shadow: none;
+  /* Remove default shadow if not needed */
+}
+
+.red-button {
+  background-color: #ec2f2f !important;
+  color: white !important;
+}

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../core/services/user.service';
 import { Utenti } from '../../../core/models/utenti.model';
@@ -40,6 +40,14 @@ export class LayoutComponent implements OnInit {
   constructor(private userService: UserService, private router: Router,private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.activeLink = this.router.url;
+
+    // Update activeLink when the route changes
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeLink = this.router.url;
+      }
+    });
     // Carica i dati del paziente al momento dell'inizializzazione del componente
     this.userData = this.userService.getUtentiData();
     this.message = this.messageService.getMessage();
@@ -53,7 +61,7 @@ export class LayoutComponent implements OnInit {
       this.links = [
         { path: '/home', label: 'Home' },
         { path: '/cartella-clinica', label: 'Cartella Clinica' },
-       
+
       ]
 
     }
@@ -63,14 +71,14 @@ export class LayoutComponent implements OnInit {
         { path: '/cartelle-cliniche', label: 'Lista cartelle cliniche' },
         { path: '/pazienti', label: 'Lista pazienti' },
 
-       
- 
+
+
       ];
     }
   }
-  logout(): void { 
+  logout(): void {
     this.userService.logout();
     this.router.navigate(['/login']);
   }
-  
+
 }

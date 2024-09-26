@@ -6,16 +6,20 @@ p {
 
 .image-container {
   display: flex;
-  justify-content: flex-start; /* Allinea l'immagine verso sinistra */
-  align-items: center; /* Centra verticalmente */
-  
- 
+  justify-content: flex-start;
+  /* Allinea l'immagine verso sinistra */
+  align-items: center;
+  /* Centra verticalmente */
+
+
 }
 
-.image-container span{
-  font-size: 25px;  /* dimensione*/
+.image-container span {
+  font-size: 25px;
+  /* dimensione*/
   /*font-style: italic; /* Corsivo */
-  font-weight: bold;  /* Grassetto */
+  font-weight: bold;
+  /* Grassetto */
   align-items: center;
   justify-content: flex-start;
   text-align: center;
@@ -26,18 +30,15 @@ p {
   display: flex;
   justify-content: flex-start;
   width: 200px;
-  height: auto; /* Mantieni l'aspect ratio dell'immagine */
+  height: auto;
+  /* Mantieni l'aspect ratio dell'immagine */
   object-fit: cover;
 }
+
 mat-card {
   width: 800px;
   padding: 1em;
-  margin-left: 300px;
-  margin-top: 50px;
- 
+  padding-left: 1091px;
+  padding-right: 1452px;
+
 }
-
-
-
-
-
