@@ -40,13 +40,15 @@ import { ErrorService } from '../../../../shared/services/error.service';
 export class VisualizzaImmagineComponent {
   userData: Utenti | null = null;
   idImmagine: any;
-  immagine!: ImmagineResponse; //!: inizializzerò questa variabile successivamente.
-  selectedImageData!: SafeUrl;
+  //immagine!: ImmagineResponse; !: inizializzerò questa variabile successivamente.
+
   selectedImageNome: string = "";
+  immagine: ImmagineResponse | null = null; // Consentiamo null
+  selectedImageData: SafeUrl | null = null;
 
 
   constructor(private route: ActivatedRoute, private userService: UserService, private immaginiService: ImmaginiService, private router: Router,
-    private sanitizer: DomSanitizer, private errorService:ErrorService) { }
+    private sanitizer: DomSanitizer, private errorService: ErrorService) { }
 
   ngOnInit(): void {
     this.userData = this.userService.getUtentiData();
@@ -71,5 +73,23 @@ export class VisualizzaImmagineComponent {
     this.router.navigate([`/${route}`]);
 
   }
+  elimina(immagineId: any): void {
+    // Chiamata al servizio per eliminare il dato solo se l'utente è un medico
+
+    this.immaginiService.eliminaImmagine(immagineId).subscribe({
+      next: () => {
+        this.selectedImageData = null;
+        this.immagine = null;
+        this.selectedImageNome = ""; 
+        console.log('Immagine eliminata con successo');
+        this.router.navigate(["/cartelle-cliniche"]);
+      },
+      error: (errorResponse) => {
+        this.errorService.reportError(errorResponse);
+
+      }
+    });
 
   }
+
+}

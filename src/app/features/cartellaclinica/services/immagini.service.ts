@@ -15,4 +15,9 @@ export class ImmaginiService {
     const params = new HttpParams().set('immagineId', immagineId);
     return this.http.get(`${this.baseUrl}/immagine/get-immagine-base64-by-id`, { params });
   }
+
+  eliminaImmagine(id: any): Observable<any> {
+    const params = new HttpParams().set('id', id);
+    return this.http.delete(`${this.baseUrl}/immagine/elimina-immagine-by-id`, { params, responseType: 'text' });
+  }
 }

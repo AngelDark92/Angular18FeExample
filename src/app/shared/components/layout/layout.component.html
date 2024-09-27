@@ -2,6 +2,10 @@
   <!-- Header -->
   <mat-toolbar color="primary">
     <div class="header-content">
+      <!-- Bottone Indietro -->
+      <button mat-icon-button (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
       <img src="assets/hospital-logo.png" alt="Hospital Logo" class="logo" />
       <span class="hospital-name">Hospital Management System</span>
       <span class="spacer"></span>
@@ -9,7 +13,7 @@
 
       <!-- User info for large screens -->
       <div class="user-info desktop-menu">
-        <span>Benvenuto</span>
+        <span>Benvenuto/a </span>
         <span *ngIf="userData?.medicoDTO">
           {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}
         </span>

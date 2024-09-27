@@ -1,30 +1,28 @@
 <ng-container *ngIf="immagine">
-    <mat-card class="immagine-card">
-      <mat-card-header>
-        <mat-card-title>Dettagli dell'immagine</mat-card-title>
-      </mat-card-header>
-  
-      <mat-card-content>
-        <p><strong>Nome esame effettuato:</strong> {{ immagine.immagine?.nome }}</p>
-        <p><strong>Data inserimento:</strong> {{ immagine.immagine?.dataInserimento }}</p>
-  
-        <!-- Se ci sono immagini, le visualizza -->
-          <mat-divider></mat-divider>
-          <h3>Immagine:</h3>
-  
-          <!-- Display the selected image in the mat-grid-tile -->
-          <mat-grid-list cols="1" rowHeight="800px">
-            <mat-grid-tile *ngIf="selectedImageData">
-              <img [src]="selectedImageData" alt="Immagine dato" />
-            </mat-grid-tile>
-          </mat-grid-list>
-      </mat-card-content>
-    </mat-card>
-  </ng-container>
-  
-  
+  <mat-card class="immagine-card">
+    <mat-card-header>
+      <mat-card-title>Dettagli dell'immagine</mat-card-title>
+    </mat-card-header>
 
+    <mat-card-content>
+      <p><strong>Nome esame effettuato:</strong> {{ immagine.immagine?.nome }}</p>
+      <p><strong>Data inserimento:</strong> {{ immagine.immagine?.dataInserimento }}</p>
+       <mat-card-actions>
+      <button mat-raised-button color="warn" class="delete-button" (click)="elimina(immagine.immagine?.id)">
+        Elimina Immagine
+      </button>
+    </mat-card-actions>
 
+      <!-- Se ci sono immagini, le visualizza -->
+      <mat-divider></mat-divider>
+      <h3>Immagine:</h3>
 
-  
-  
+      <!-- Display the selected image in the mat-grid-tile -->
+      <mat-grid-list cols="1" rowHeight="800px">
+        <mat-grid-tile *ngIf="selectedImageData">
+          <img [src]="selectedImageData" alt="Immagine dato" />
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

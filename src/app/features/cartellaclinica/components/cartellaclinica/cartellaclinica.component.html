@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="header">
     <span>
-        Cartella clinica di: {{dati?.anagrafica?.nome }} {{ dati?.anagrafica?.cognome }}, {{
+        Dati contenuti nella cartella clinica di: {{dati?.anagrafica?.nome }} {{ dati?.anagrafica?.cognome }}, {{
         dati?.anagrafica?.codiceFiscale }}.
     </span>
 
@@ -61,7 +61,7 @@
                 <!-- Abilita/disabilita in base al valore di dato.immagineId -->
                 <button mat-raised-button color="primary" (click)="visualizza(dato.immagini.id)"
                     class="material-icons pageview"
-                    [disabled]="!dato.immagini"><mat-icon>pageview</mat-icon>Visualizza</button>
+                    [disabled]="!dato.immagini || !dato.immagini.id" ><mat-icon>pageview</mat-icon>Visualizza</button>
 
                 <button *ngIf="userData?.medicoDTO" mat-raised-button color="primary" (click)="nuovaImmagine(dato.id)"
                     class="material-icons add_box" [disabled]="!dato.immagini"> <mat-icon>add_box</mat-icon> Carica una nuova immagine</button>
@@ -69,7 +69,7 @@
                 <button *ngIf="userData?.medicoDTO" mat-raised-button color="primary" (click)="eliminaDato(dato.id)"
                     class="material-icons delete red-button" [disabled]="!dato.immagini" 
                     [ngClass]="dato.immagini? 'red-button' : 'gray-button'" >
-                     <mat-icon>delete</mat-icon> Elimina</button>
+                     <mat-icon>delete</mat-icon> Elimina Dato</button>
             </div>
         </td>
     </ng-container>

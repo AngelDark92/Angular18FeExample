@@ -13,7 +13,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Subscription } from 'rxjs';
 import { ErrorService } from '../../services/error.service';
 import { MatIcon } from '@angular/material/icon';
-import { MatDividerModule } from '@angular/material/divider';
+import { Location } from '@angular/common';
 
 
 
@@ -43,7 +43,8 @@ export class LayoutComponent implements OnInit, OnDestroy {
   links = [{ path: '/home', label: 'Home' }];
   private errorSubscription!: Subscription;
 
-  constructor(private userService: UserService, private router: Router, private messageService: MessageService, private errorService: ErrorService,
+  constructor(private userService: UserService, private router: Router, private messageService: MessageService, 
+    private errorService: ErrorService, private location: Location,
     private snackBar: MatSnackBar) { }
 
   ngOnDestroy(): void {
@@ -113,5 +114,15 @@ export class LayoutComponent implements OnInit, OnDestroy {
     this.userService.logout();
     this.router.navigate(['/login']);
   }
+
+  goBack(): void {
+    if (window.history.length > 1) {  //con (window.history.length > 1) controllo se esiste una cronologia 
+      this.location.back();  // Torna indietro se c'è una cronologia
+      console.log('Tornando indietro...');
+    } else {
+      this.router.navigate(['/login']);  // Naviga a una pagina specifica se non c'è cronologia
+    }
+  }
+
 
 }
