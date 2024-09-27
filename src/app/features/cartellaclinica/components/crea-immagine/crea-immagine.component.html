@@ -2,7 +2,7 @@
     <mat-card-title>Compila i seguenti campi per creare l'immagine!</mat-card-title>
     <form [formGroup]="createImageForm" (ngSubmit)="crea()">
       
-      <!-- Caricamento immagine - RIMOSSO mat-form-field per input file -->
+      <!-- Caricamento immagine  -->
       <div class="full-width">
         <label for="file">Carica immagine </label>
         <input id="file" type="file" (change)="onFileChange($event)" required />

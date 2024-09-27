@@ -64,7 +64,7 @@
             <div style="display: flex; gap: 10px;">
                 <button mat-raised-button color="primary"
                     (click)="visualizza(cartella.dati.id)" class="material-icons pageview" 
-                    [disabled]="!cartella.dati"> <mat-icon>pageview</mat-icon> Visualizza dato selezionato</button>
+                    [disabled]="!cartella.dati || !cartella.dati.id "> <mat-icon>pageview</mat-icon> Visualizza dato selezionato</button>
 
                     <button mat-raised-button color="primary" 
                     (click)="visualizzaDatiCartella(cartella.pazienteDTO?.id)" [disabled]="!cartella.dati" class="material-icons pageview" > <mat-icon>pageview</mat-icon>

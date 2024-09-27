@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Dato } from '../../../../core/models/dato.model';
 import { DatiService } from '../../services/dati.service';
 import { MessageService } from '../../../../shared/services/message.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -30,7 +31,7 @@ import { MessageService } from '../../../../shared/services/message.service';
 export class CreaDatoComponent {
   datoForm: FormGroup;
   cartellaId: any;
-
+  
   private baseUrl = "http://localhost:8080";
 
   constructor(public fb: FormBuilder, public router: Router, public route: ActivatedRoute, private datiService: DatiService, private messageService: MessageService) {
@@ -57,7 +58,7 @@ export class CreaDatoComponent {
       this.datiService.creaDatoPerCartella(datoDTO, this.cartellaId).subscribe({
         next: (response) => {
           console.log('Creazione dato avvenuta con successo', response);
-          this.messageService.setMessage('Creazione dato avvenuta con successo.');
+          this.messageService.setMessage('Creazione dato avvenuta con successo. Ecco la lista delle tue cartelle cliniche');
           this.router.navigate(["/cartelle-cliniche"]);
         },
         error: (errorResponse) => {
@@ -70,6 +71,7 @@ export class CreaDatoComponent {
     }
 
   }
+  
 }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Cartellaclinica } from '../../../../core/models/cartellaclinica.model';
 import { Utenti } from '../../../../core/models/utenti.model';
 import { UserService } from '../../../../core/services/user.service';
@@ -15,6 +15,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ErrorService } from '../../../../shared/services/error.service';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { MessageService } from '../../../../shared/services/message.service';
 
 
 @Component({
@@ -30,9 +32,14 @@ export class ListaCartelleComponent implements OnInit {
   userData: Utenti | null = null;
   cartelle: Cartellaclinica[] = [];
   datoId: any;
+  successMessage: string = "";
+  private _snackBar = inject(MatSnackBar);
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
   displayedColumns: string[] = ['nomePaziente', 'cognomePaziente', 'codiceFiscale', 'dato', 'visualizza'];
 
-  constructor(private userService: UserService, private datiService: DatiService, private router: Router, private errorService:ErrorService) { }
+  constructor(private userService: UserService, private datiService: DatiService, private router: Router, private errorService:ErrorService,private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.userData = this.userService.getUtentiData();
@@ -49,8 +56,16 @@ export class ListaCartelleComponent implements OnInit {
         }
       })
     }
+    this.successMessage = this.messageService.getMessage();
+    if (this.successMessage) {
+      this._snackBar.open(this.successMessage, "", {duration: 8000, horizontalPosition: this.horizontalPosition,
+        verticalPosition: this.verticalPosition});
+    
+  }
 
   }
+
+    
 
 
   visualizza(datoId: any): void {
