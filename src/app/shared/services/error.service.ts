@@ -4,6 +4,12 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+
+/*Il servizio ErrorService è un modo centralizzato per gestire gli errori nell'applicazione Angular, 
+fornendo un meccanismo per rilevare,
+elaborare e notificare errori sia lato client che lato server in un modo reattivo utilizzando RxJS.*/
+
 export class ErrorService {
   private errorSubject = new Subject<string>();
 

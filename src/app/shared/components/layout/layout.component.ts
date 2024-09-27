@@ -13,6 +13,7 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 import { Subscription } from 'rxjs';
 import { ErrorService } from '../../services/error.service';
 import { MatIcon } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 
@@ -29,7 +30,7 @@ import { MatIcon } from '@angular/material/icon';
     CommonModule,
     MatCardModule,
     MatTabsModule,
-    MatIcon
+    MatIcon,
   ]
 })
 export class LayoutComponent implements OnInit, OnDestroy {

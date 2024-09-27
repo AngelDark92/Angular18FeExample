@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-card-title>Compila i seguenti campi per creare il dato!</mat-card-title>
+    <form [formGroup]="datoForm" (ngSubmit)="create()">
+    
+  
+      <!-- Dagnosi -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Diagnosi</mat-label>
+        <input matInput formControlName="diagnosi" placeholder="Inserisci la diagnosi" required />
+        <mat-error *ngIf="datoForm.get('diagnosi')?.hasError('required')">
+          La diagnosi è obbligatoria.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Reparto -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Reparto</mat-label>
+        <input matInput formControlName="reparto" placeholder="Inserire il reparto" />
+        <mat-error *ngIf="datoForm.get('reparto')?.hasError('required')">Il reparto è obbligatoria.</mat-error>
+      </mat-form-field>
+  
+      <!-- Terapia -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Tipo di immagine</mat-label>
+        <input matInput formControlName="terapia" placeholder="Inserire la terapia" required />
+        <mat-error *ngIf="datoForm.get('terapia')?.hasError('required')">
+          Bisogna inserire la terapia.
+        </mat-error>
+      </mat-form-field>
+  
+      <!-- Bottone di invio -->
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="datoForm.invalid">
+          Crea Dato
+        </button>
+      </div>
+    </form>
+  </mat-card>
+  

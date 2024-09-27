@@ -85,8 +85,7 @@ export class ListaPazientiComponent implements OnInit {
   creaCartella(pazienteId: any, medicoId:any): void {
     this.pazientiService.creaCartellaClinicaPerPaziente(pazienteId,medicoId).subscribe({
       next: () => {
-
-        //this.router.navigate([""], cartellaId);
+      this.router.navigate(["/cartelle-cliniche"]);
 
 
       },

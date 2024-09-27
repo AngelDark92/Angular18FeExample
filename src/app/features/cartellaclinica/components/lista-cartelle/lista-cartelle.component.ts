@@ -14,13 +14,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { ErrorService } from '../../../../shared/services/error.service';
+import { MatDividerModule } from '@angular/material/divider';
 
 
 @Component({
   selector: 'app-lista-cartelle',
   standalone: true,
   imports: [MatTableModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatInputModule,
-    FormsModule, MatIconModule, CommonModule, MatButtonModule],
+    FormsModule, MatIconModule, CommonModule, MatButtonModule, MatDividerModule ],
   templateUrl: './lista-cartelle.component.html',
   styleUrl: './lista-cartelle.component.scss'
 })
@@ -78,6 +79,10 @@ export class ListaCartelleComponent implements OnInit {
     }else {
       console.error('Utente non è un medico, non può eliminare la cartella');
     }
+  }
+
+  creaDato(cartellaId: any): void {
+    this.router.navigate(['/nuovo-dato', cartellaId]);
   }
 
 }

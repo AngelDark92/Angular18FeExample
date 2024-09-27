@@ -1,3 +1,4 @@
+
 <mat-toolbar color="primary" class="header">
     <span>
         {{ userData?.medicoDTO?.nome }} {{ userData?.medicoDTO?.cognome }}, ecco la lista delle tue cartelle cliniche:
@@ -41,9 +42,14 @@
                 </mat-form-field>
             </ng-container>
             
-            <!-- Se non ci sono dati, mostra il pulsante Crea Dato -->
+            <!-- Questo blocco definisce un template alternativo (con #creaDatoTemplate come riferimento) 
+             che sarà visibile solo quando l'*ngIf risulterà falso (cioè quando non ci sono dati).
+             Se non ci sono dati, mostra il pulsante Crea Dato 
+             con ng-template, il contenuto viene caricato solo quando ne hai bisogno.
+             L'uso di ng-template è utile quando vuoi mostrare contenuti alternativi in modo condizionale. 
+             In questo caso, il pulsante "Crea Dato" è il contenuto alternativo che appare quando non ci sono dati.-->
             <ng-template #creaDatoTemplate>
-                <button mat-raised-button color="primary" >
+                <button mat-raised-button color="primary" (click)="creaDato(cartella.id)">
                     Crea Dato
                 </button>
             </ng-template>
@@ -61,11 +67,13 @@
                     [disabled]="!cartella.dati"> <mat-icon>pageview</mat-icon> Visualizza dato selezionato</button>
 
                     <button mat-raised-button color="primary" 
-                    (click)="visualizzaDatiCartella(cartella.pazienteDTO?.id)" [disabled]="!cartella.dati" class="material-icons pageview" > <mat-icon>pageview</mat-icon>Visualizza Dati Cartella</button>
+                    (click)="visualizzaDatiCartella(cartella.pazienteDTO?.id)" [disabled]="!cartella.dati" class="material-icons pageview" > <mat-icon>pageview</mat-icon>
+                    Visualizza Dati Cartella</button>
 
                  <button mat-raised-button color="warm" (click)="elimina(cartella.id)" [disabled]="!cartella.dati" 
                  [ngClass]="cartella.dati ? 'red-button' : 'gray-button'" 
-                 class="material-icons delete red-button"><mat-icon>delete</mat-icon>Elimina
+                 class="material-icons delete red-button"><mat-icon>delete</mat-icon>
+                 Elimina
                 </button>
             </div>
         </td>

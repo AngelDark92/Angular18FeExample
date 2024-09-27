@@ -53,6 +53,11 @@ export class DatiService {
     });
   }
   
+  creaDatoPerCartella(datoDTO: Dato, cartellaId: any): Observable<any>{
+    return this.http.post(`${this.baseUrl}/dato/crea-dato`, datoDTO, {
+      params: { cartellaId } // 
+    });
+  }
 
   }
   
